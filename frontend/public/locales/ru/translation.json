@@ -1,0 +1,235 @@
+{
+  "SystemMessages": {
+    "Error": "Ошибка"
+  },
+  "Common": {
+    "LargeImageError": "❌ Максимальный размер GIF - 2.5MB",
+    "UploadingImageError": "❌ Ошибка при загрузке изображения."
+  },
+  "AccessModal": {
+    "SwitchLogIn": "Войти",
+    "SwitchSignUp": "Регистрация",
+    "InputNameLogIn": "Имя",
+    "InputNameSignUp": "Имя",
+    "InputErrorNameEmpty": "Введите имя",
+    "InputErrorNameMinimumLength": "Минимальная длина имени - 1 символ",
+    "InputErrorNameMaximumLength": "Максимальная длина имени - 200 символов",
+    "InputErrorIdAlreadyExists": "Этот Id уже существует",
+    "InputErrorIdMinimumLength": "Минимальная длина Id - 1 символ",
+    "InputErrorIdMaximumLength": "Максимальная длина Id - 35 символов",
+    "InputErrorIdMinimumMaximumLengthSymbols": "Минимальная длина id - 1 символ, максимальная - 35, допускаются латинские буквы, цифры, нижние подчеркивания и тире",
+    "InputEmail": "* Email",
+    "InputErrorEmailEmpty": "Введите email",
+    "InputErrorEmailMaximumLength": "Максимальная длина email - 100 символов",
+    "InputErrorEmailAlreadyExists": "Этот email уже существует",
+    "InputPasswordLogIn": "Пароль",
+    "InputPasswordSignUp": "* Пароль",
+    "InputErrorPasswordEmpty": "Введите пароль",
+    "InputErrorPasswordMinimumMaximumLengthSymbols": "Минимальная длина пароля - 8 символов, максимальная - 50, допускаются латинские буквы, цифры и специальные символы",
+    "InputErrorEmailPasswordWrong": "Неверная почта или пароль",
+    "InputErrorAcceptTerms": "Необходимо принять условия",
+    "Terms": "Я принимаю <1>условия пользовательского соглашения</1>, <2>политику конфиденциальности</2> и <3>политику использования файлов cookies</3>."
+  },
+  "User": {
+    "UserDeleted": "Пользователь удалён"
+  },
+  "PostCreatePage": {
+    "CreatePost": "Создать пост",
+    "Text": "Текст",
+    "Title": "Заголовок",
+    "AddMainImage": "Добавить изображение",
+    "ChangeMainImage": "Изменить",
+    "DeleteMainImage": "Удалить",
+    "Publish": "Опубликовать",
+    "Back": "Назад",
+    "FailedCreatePost": "Не удалось создать пост."
+  },
+  "PostEditPage": {
+    "EditPost": "Редактирование поста",
+    "AddMainImage": "Добавить изображение",
+    "Change": "Изменить",
+    "Delete": "Удалить",
+    "Publish": "Опубликовать",
+    "Text": "Текст",
+    "Title": "Заголовок",
+    "Back": "Назад",
+    "FailedSaveChanges": "Не удалось сохранить изменения"
+  },
+  "UserEditPage": {
+    "EditUser": "Редактирование пользователя и настройки",
+    "Settings": "Настройки",
+    "Interface": "Интерфейс",
+    "Privacy": "Конфиденциальность",
+    "HideGif": "Скрыть GIF",
+    "ShowGif": "Показать GIF",
+    "UserName": "Имя",
+    "UserBio": "О себе",
+    "DeleteAllYourPostsButton": "Удалить все посты",
+    "DeleteAllUserPostsButton": "Удалить все посты",
+    "DeleteAllYourPosts": "Удалить все посты ? Посты будут удалены без возможности восстановления.",
+    "DeleteAllPostsByUser": "Удалить все посты пользователя ? Посты будут удалены без возможности восстановления.",
+    "AllPostsDeleted": "Все посты удалены",
+    "DeleteAccount": "Удалить аккаунт",
+    "DeleteAccountQuestion": "Удалить аккаунт пользователя ? Аккаунт будет удален без возможности восстановления.",
+    "DeleteUserAccount": "Удалить аккаунт пользователя",
+    "SaveChanges": "Сохранить изменения",
+    "Save": "Сохранить",
+    "IdErrorMinimumMaximumLengthSymbols": "Минимальная длина id - 1 символ, максимальная - 35, допускаются латинские буквы, цифры, нижние подчеркивания и тире",
+    "IdAlreadyExists": "Этот Id уже существует",
+    "ChangePassword": "Изменить пароль",
+    "Hide": "Скрыть",
+    "OldPassword": "Старый пароль",
+    "NewPassword": "Новый пароль",
+    "OldPasswordIncorrect": "Старый пароль - неверный",
+    "PasswordRequirements": "В пароле допускаются латинские буквы, цифры и специальные символы.",
+    "PasswordSuccessfullyChanged": "Пароль успешно изменён",
+    "Gender": "Пол",
+    "Female": "женский",
+    "Male": "мужской",
+    "Unspecified": "не указан",
+    "CustomGender": "Самоопределение",
+    "GenderError": "Ошибка обновления пола.",
+    "GenderSelectionNotAvailable": "Функция выбора пола недоступна",
+    "HideGender": "Скрыть пол",
+    "ShowGender": "Показать пол"
+  },
+  "CookiesBanner": {
+    "Text": "Этот сайт использует файлы cookies. Нажимая кнопку 'Принять' или продолжая пользоваться сайтом, вы соглашаетесь на использование файлов cookies.",
+    "ButtonMoreDetails": "Подробнее",
+    "ButtonAccept": "Принять"
+  },
+  "SideMenuDesktop": {
+    "MyProfile": "Мой профиль",
+    "Messages": "Сообщения",
+    "Friends": "Друзья",
+    "Communities": "Сообщества",
+    "Photo": "Фото",
+    "Video": "Видео",
+    "Likes": "Нравится",
+    "Settings": "Настройки",
+    "Bookmarks": "Закладки",
+    "AboutCrystal": "О Crystal",
+    "Agreements": "Соглашения",
+    "Help": "Помощь"
+  },
+  "SideMenuMobile": {
+    "MyProfile": "Мой профиль",
+    "Messages": "Сообщения",
+    "Friends": "Друзья",
+    "Communities": "Сообщества",
+    "Photo": "Фото",
+    "Video": "Видео",
+    "Likes": "Нравится",
+    "Bookmarks": "Закладки",
+    "AboutCrystal": "О Crystal",
+    "Agreements": "Соглашения",
+    "Help": "Помощь"
+  },
+  "CurrentTopics": {
+    "CurrentTopics": "Актуальные темы",
+    "ShowMore": "Посмотреть еще",
+    "Post": "Пост",
+    "PostsAverage": "Поста",
+    "Posts": "постов",
+    "key_one": "пост",
+    "key_few": "поста",
+    "key_many": "постов"
+  },
+  "RecommendedUsers": {
+    "YouMightLike": "Вам может понравиться",
+    "Subscribe": "Подписаться",
+    "ShowMore": "Посмотреть еще"
+  },
+  "OptionsMenuGuest": {
+    "AboutCrystal": "О CRYSTAL",
+    "Agreements": "Соглашения",
+    "Help": "Помощь"
+  },
+  "PostSourceMenu": {
+    "Subscriptions": "Подписки",
+    "Preferences": "Предпочтения",
+    "Mine": "Мои",
+    "World": "Мир"
+  },
+  "OptionsMenuUser": {
+    "MyProfile": "Мой профиль",
+    "Settings": "Настройки",
+    "Agreements": "Соглашения",
+    "Help": "Помощь",
+    "Exit": "Выход",
+    "LogOut": "Выйти из аккаунта ?"
+  },
+  "PostPreview": {
+    "DeleteAccountQuestion": "Удалить аккаунт пользователя ?",
+    "DeleteAllUserPostsQuestion": "Удалить все посты пользователя ?",
+    "DeletePostQuestion": "Удалить пост ?",
+    "UserDeleted": "Пользователь удален",
+    "EditPost": "Редактировать",
+    "DeletePost": "Удалить",
+    "DeleteAllUserPosts": "Удалить все посты пользователя",
+    "DeleteUser": "Удалить пользователя",
+    "add": "доб",
+    "upd": "обн"
+  },
+  "FullPostPage": {
+    "DeleteAccountQuestion": "Удалить аккаунт пользователя ?",
+    "DeleteAllUserPostsQuestion": "Удалить все посты пользователя ?",
+    "DeletePostQuestion": "Удалить пост ?",
+    "UserDeleted": "Пользователь удален",
+    "EditPost": "Редактировать",
+    "DeletePost": "Удалить",
+    "DeleteAllUserPosts": "Удалить все посты пользователя",
+    "DeleteUser": "Удалить пользователя",
+    "add": "доб",
+    "upd": "обн"
+  },
+  "UserInformation": {
+    "EditUser": "Редактировать",
+    "FailedDeleteAvatar": "❌ Не удалось удалить аватар",
+    "FailedDeleteBanner": "❌ Не удалось удалить баннер",
+    "ShowMore": "Подробнее",
+    "Hide": "Скрыть"
+  },
+  "LikesPage": {
+    "LikedPosts": "Нравится",
+    "NolikedPosts": "Нет понравившихся постов"
+  },
+  "MoreAboutUserModal": {
+    "DetailedInformation": "Подробная информация",
+    "Gender": "Пол",
+    "Female": "женский",
+    "Male": "мужской",
+    "Unspecified": "не указан",
+    "Registration": "Регистрация",
+    "Update": "Обновление"
+  },
+  "UseFormattedLastSeenDateShort": {
+    "seconds": "с",
+    "minutes": "мин",
+    "hours": "ч",
+    "days": "д",
+    "months": "мес",
+    "key_one": "г",
+    "key_few": "г",
+    "key_many": "л",
+    "key_other": "л"
+  },
+ "UseFormattedLastSeenDate": {
+  "prefix_male": "Заходил",
+  "prefix_female": "Заходила",
+  "prefix_unspecified": "Заходил(а)",
+  "ago": "назад",
+  "yesterday": "вчера",
+  "at": "в",
+  "seconds_one": "секунду",
+  "seconds_few": "секунды",
+  "seconds_many": "секунд",
+  "minutes_one": "минуту",
+  "minutes_few": "минуты",
+  "minutes_many": "минут",
+  "hours_one": "час",
+  "hours_few": "часа",
+  "hours_many": "часов"
+}
+
+}

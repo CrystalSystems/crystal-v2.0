@@ -1,0 +1,22 @@
+.formatted_post_date_wrap {
+    display: flex;
+    align-items: center;
+}
+
+.separator svg {
+    display: flex;
+    border-radius: 50%;
+    width: 4px;
+    height: 4px;
+    margin: 0 8px;
+    fill: var(--color_global);
+}
+
+@media (max-width: 365px) {
+    .separator svg {
+        width: 2.8px;
+        height: 2.8px;
+    }
+}
+
+ 

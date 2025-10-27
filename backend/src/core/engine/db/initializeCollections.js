@@ -1,0 +1,67 @@
+// src/core/engine/db/initializeCollections.js
+
+import { USER_SCHEMA, USER_INDEXES } from '../../../modules/user/user.schema.js';
+import { POST_SCHEMA, POST_INDEXES } from '../../../modules/post/post.schema.js'; 
+import { HASHTAG_SCHEMA, HASHTAG_INDEXES } from '../../../modules/hashtag/hashtag.schema.js'; 
+
+/**
+ 💡 Asynchronously creates collections with $jsonSchema validation and sets all indexes.
+ Called once at application startup (from connectDB.js).
+
+  @param {import('mongodb').Db} db - The database object obtained via getDB().
+ */
+export async function initializeCollections(db) {
+    console.log(" ⚙️ Initializing MongoDB collections and indexes...");
+
+    // 1. User initialization
+    await upsertCollection(db, 'users', USER_SCHEMA, USER_INDEXES); 
+    
+    // 2. Initialization of posts
+    await upsertCollection(db, 'posts', POST_SCHEMA, POST_INDEXES); 
+    
+    // 3. Initializing hashtags
+    await upsertCollection(db, 'hashtags', HASHTAG_SCHEMA, HASHTAG_INDEXES); 
+
+    console.log(" ✅ All collections and indexes initialized.");
+}
+
+/**
+ * Helper function for atomically creating a collection or updating its validator.
+ * @param {import('mongodb').Db} db 
+ * @param {string} collectionName 
+ * @param {object} schema 
+ * @param {Array<object>} indexes 
+ */
+async function upsertCollection(db, collectionName, schema, indexes) {
+    // 1. Creating a collection with validation or updating a validator
+    try {
+        await db.createCollection(collectionName, {
+            validator: { $jsonSchema: schema },
+            validationAction: 'error', // Block insert/update on error
+            validationLevel: 'strict', // Apply to all documents
+        });
+        console.log(` [${collectionName}] Collection created with $jsonSchema.`);
+    } catch (e) {
+        if (e.code === 48) {
+            // Code 48: Collection already exists. Updating the validator.
+            await db.command({
+                collMod: collectionName,
+                validator: { $jsonSchema: schema },
+                validationAction: 'error',
+                validationLevel: 'strict',
+            });
+            console.log(` [${collectionName}] $jsonSchema updated.`);
+        } else {
+            console.error(` [${collectionName}] Error creating/updating collection:`, e);
+            throw e;
+        }
+    }
+
+    // 2. Creating indexes
+    const collection = db.collection(collectionName);
+    for (const index of indexes) {
+        // createIndex creates an index only if it doesn't already exist (atomically)
+        await collection.createIndex(index.key, index.options);
+        console.log(` [${collectionName}] Index created: ${JSON.stringify(index.key)}`);
+    }
+}
