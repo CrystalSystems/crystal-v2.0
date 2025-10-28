@@ -46,7 +46,7 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 <h3 align="center">CRYSTAL is tested on</h3>
 <p align="center">
   <a href="https://www.browserstack.com/">
-    <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/e727fade62bba9bc22a847dcd3f6d154644cc582/assets/browserstack_logo.svg?token=ALKCJMKK5CNKZJHMQTIGIZLJADX6Y" width="290" />
+    <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/bc7bf8b166feef1f4aed3e88dac61d1a25dd2665/assets/browserstack_logo.svg" width="290" />
   </a>
 </p>
 
