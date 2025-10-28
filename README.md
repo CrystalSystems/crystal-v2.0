@@ -33,15 +33,15 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 
 6. Added the ability to upload GIF images for posts and user avatar/banner. GIFs are sanitized through special logic in sharp-upload.js to ensure cybersecurity. All images except GIF are converted to WebP.
 
-6. Added the ability to specify the user's gender.
+7. Added the ability to specify the user's gender.
 
-7. On the user page, a section has been added with detailed information about the user (gender, registration date, date of user data update).
+8. On the user page, a section has been added with detailed information about the user (gender, registration date, date of user data update).
 
-8. Added a user privacy setting that allows you to hide gender.
+9. Added a user privacy setting that allows you to hide gender.
 
-9. Added a user interface setting that allows you to hide all GIF images on the website.
+10. Added a user interface setting that allows you to hide all GIF images on the website.
 
-10. The security system complies with [CRYSTAL v1.0  (Production)](https://shedov.top/description-and-capabilities-of-crystal-v1-0/#paragraph_7).
+11. The security system complies with [CRYSTAL v1.0  (Production)](https://shedov.top/description-and-capabilities-of-crystal-v1-0/#paragraph_7).
 
 **⚠️ Before using [CRYSTAL v2.0](https://github.com/CrystalSystems/crystal-v2.0) or its code in a production environment, it is strongly recommended to carefully review the implementation and assess any potential cybersecurity risks.**<br/>
 
