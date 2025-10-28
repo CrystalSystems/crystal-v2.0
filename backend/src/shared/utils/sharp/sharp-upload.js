@@ -225,7 +225,7 @@ export async function processImage(req, res, next) {
         */
 
         /*
-        1. GIF file sanitization
+        1. GIF file sanitization.
            If uploaded file is a GIF, validate its integrity and re-encode it safely.
            This prevents injection of malicious frames or broken animation data.
         */
@@ -245,10 +245,10 @@ export async function processImage(req, res, next) {
             mimetype: "image/gif",
             extension: "gif",
           };
-          // /GIF file sanitization
+          // /GIF file sanitization.
 
           /*
-          2. WebP conversion and validation
+          2. WebP conversion and validation.
              For non-GIF images: convert input to optimized WebP format (quality=80)
              and validate resulting file header to ensure conversion integrity.
           */
