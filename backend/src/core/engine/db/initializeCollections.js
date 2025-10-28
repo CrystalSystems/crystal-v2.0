@@ -1,8 +1,9 @@
 // src/core/engine/db/initializeCollections.js
 
 import { USER_SCHEMA, USER_INDEXES } from '../../../modules/user/user.schema.js';
-import { POST_SCHEMA, POST_INDEXES } from '../../../modules/post/post.schema.js'; 
-import { HASHTAG_SCHEMA, HASHTAG_INDEXES } from '../../../modules/hashtag/hashtag.schema.js'; 
+import { POST_SCHEMA, POST_INDEXES } from '../../../modules/post/post.schema.js';
+import { HASHTAG_SCHEMA, HASHTAG_INDEXES } from '../../../modules/hashtag/hashtag.schema.js';
+import { LIKE_SCHEMA, LIKE_INDEXES } from '../../../modules/like/like.schema.js';
 
 /**
  Asynchronously creates collections with $jsonSchema validation and sets all indexes.
@@ -14,23 +15,26 @@ export async function initializeCollections(db) {
     console.log(" ⚙️ Initializing MongoDB collections and indexes...");
 
     // 1. User initialization
-    await upsertCollection(db, 'users', USER_SCHEMA, USER_INDEXES); 
-    
+    await upsertCollection(db, 'users', USER_SCHEMA, USER_INDEXES);
+
     // 2. Initialization of posts
-    await upsertCollection(db, 'posts', POST_SCHEMA, POST_INDEXES); 
-    
+    await upsertCollection(db, 'posts', POST_SCHEMA, POST_INDEXES);
+
     // 3. Initializing hashtags
-    await upsertCollection(db, 'hashtags', HASHTAG_SCHEMA, HASHTAG_INDEXES); 
+    await upsertCollection(db, 'hashtags', HASHTAG_SCHEMA, HASHTAG_INDEXES);
+
+    // 4. Initializing likes
+    await upsertCollection(db, 'likes', LIKE_SCHEMA, LIKE_INDEXES);
 
     console.log(" ✅ All collections and indexes initialized.");
 }
 
 /**
  * Helper function for atomically creating a collection or updating its validator.
- * @param {import('mongodb').Db} db 
- * @param {string} collectionName 
- * @param {object} schema 
- * @param {Array<object>} indexes 
+ * @param {import('mongodb').Db} db
+ * @param {string} collectionName
+ * @param {object} schema
+ * @param {Array<object>} indexes
  */
 async function upsertCollection(db, collectionName, schema, indexes) {
     // 1. Creating a collection with validation or updating a validator
