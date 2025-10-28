@@ -1,4 +1,4 @@
-[<img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/crystal-v2.0_logo.png?token=GHSAT0AAAAAADAFJJAXEOSOTRJBSN6RP6AI2IA57MA">](https://shedov.top/description-and-capabilities-of-crystal-v2-0/)
+[<img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/crystal-v2.0_logo.png">](https://shedov.top/description-and-capabilities-of-crystal-v2-0/)
 
 
 [![Members](https://img.shields.io/badge/dynamic/json?style=for-the-badge&label=&logo=discord&logoColor=white&labelColor=black&color=%23f3f3f3&query=$.approximate_member_count&url=https%3A%2F%2Fdiscord.com%2Fapi%2Finvites%2FENB7RbxVZE%3Fwith_counts%3Dtrue)](https://discord.gg/ENB7RbxVZE)&nbsp;[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge&logo=5865F2&logoColor=black&labelColor=black&color=%23f3f3f3)](https://github.com/CrystalSystems/crystal-v2.0/blob/main/LICENSE)<br/>
