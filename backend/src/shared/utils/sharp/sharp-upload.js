@@ -247,13 +247,11 @@ export async function processImage(req, res, next) {
           };
           // /GIF file sanitization
 
-
           /*
           2. WebP conversion and validation
              For non-GIF images: convert input to optimized WebP format (quality=80)
              and validate resulting file header to ensure conversion integrity.
           */
-
         } else {
           const processedBuffer = await sharp(fileBuffer)
             .webp({ quality: 80 })
