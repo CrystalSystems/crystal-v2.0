@@ -25,7 +25,7 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 
 2. [Data schemas](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/user/user.schema.js)  for all collections, defined using the standard JSON Schema and [initialized](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/core/engine/db/initializeCollections.js) in MongoDB using the [$jsonSchema](https://www.mongodb.com/docs/manual/reference/operator/query/jsonSchema/#mongodb-query-op.-jsonSchema).
 
-3. To search the content (this component will be published in the [repository](https://github.com/CrystalSystems/crystal-v2.0) at a later date), MongoDB full-text search is used based on the [$text](https://www.mongodb.com/docs/manual/reference/operator/query/text/) operator.
+3. To search the content (this component will be published in the [repository](https://github.com/CrystalSystems/crystal-v2.0) at a later date), MongoDB Full-Text search is used based on the [$text](https://www.mongodb.com/docs/manual/reference/operator/query/text/) operator.
 
 4. Added user status (online/offline). The logic is implemented using WebSocket ([frontend](https://github.com/CrystalSystems/crystal-v2.0/blob/main/frontend/src/shared/hooks/useWebSocket/useWebSocket.js) | [backend]([</a>](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/core/engine/web/websocket.js))).
 
