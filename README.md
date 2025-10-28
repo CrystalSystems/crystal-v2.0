@@ -31,7 +31,7 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 
 5. Multer has been replaced by [Sharp](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/shared/utils/sharp/sharp-upload.js).
 
-6. Added the ability to upload GIF images for posts and user avatar/banner. GIFs are sanitized through special logic in sharp-upload.js to ensure cybersecurity. All images except GIF are converted to WebP.
+6. Added the ability to upload GIF images for posts and user avatar/banner. GIFs are sanitized through [special logic](https://github.com/CrystalSystems/crystal-v2.0/blob/6c3478f5ea8bb037b4de42b0feff5f6560c753c4/backend/src/shared/utils/sharp/sharp-upload.js#L228) in [sharp-upload.js](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/shared/utils/sharp/sharp-upload.js) to ensure cybersecurity. All images except GIF are [converted](https://github.com/CrystalSystems/crystal-v2.0/blob/6c3478f5ea8bb037b4de42b0feff5f6560c753c4/backend/src/shared/utils/sharp/sharp-upload.js#L251) to WebP.
 
 7. Added the ability to specify the user's gender.
 
