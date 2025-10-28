@@ -5,7 +5,7 @@ import { POST_SCHEMA, POST_INDEXES } from '../../../modules/post/post.schema.js'
 import { HASHTAG_SCHEMA, HASHTAG_INDEXES } from '../../../modules/hashtag/hashtag.schema.js'; 
 
 /**
- 💡 Asynchronously creates collections with $jsonSchema validation and sets all indexes.
+ Asynchronously creates collections with $jsonSchema validation and sets all indexes.
  Called once at application startup (from connectDB.js).
 
   @param {import('mongodb').Db} db - The database object obtained via getDB().
