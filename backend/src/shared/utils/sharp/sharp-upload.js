@@ -272,7 +272,7 @@ export async function processImage(req, res, next) {
         }
         /*
         ---------------------------
-        / Image format normalization and sanitization
+        /Image format normalization and sanitization
         ---------------------------
         */
 
@@ -314,7 +314,7 @@ export async function processImage(req, res, next) {
         }
         /*
         ---------------------------
-        / Post-sanitization integrity and security checks
+        /Post-sanitization integrity and security checks
         ---------------------------
         */
 
