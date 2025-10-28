@@ -23,25 +23,27 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 
 1. Mongoose has been removed and replaced by [native driver](https://www.npmjs.com/package/mongodb) MongoDB.
 
-2. [Data schemas](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/user/user.schema.js)  for all collections, defined using the standard JSON Schema and [initialized](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/core/engine/db/initializeCollections.js) in MongoDB using the [$jsonSchema](https://www.mongodb.com/docs/manual/reference/operator/query/jsonSchema/#mongodb-query-op.-jsonSchema).
+2. Data schemas for all collections ([users](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/user/user.schema.js), [posts](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/post/post.schema.js), [likes](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/like/like.schema.js), [hashtags](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/hashtag/hashtag.schema.js)), defined using the standard JSON Schema and [initialized](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/core/engine/db/initializeCollections.js) in MongoDB using the [$jsonSchema](https://www.mongodb.com/docs/manual/reference/operator/query/jsonSchema/#mongodb-query-op.-jsonSchema). This approach provides consistency and a common structure for documents in collections.
 
-3. To search the content (this component will be published in the [repository](https://github.com/CrystalSystems/crystal-v2.0) at a later date), MongoDB Full-Text Search is used based on the [$text](https://www.mongodb.com/docs/manual/reference/operator/query/text/) operator.
+3. For [hashtags](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/hashtag/hashtag.schema.js) and [likes](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/like/like.schema.js) separate collections were created with denormalization and indexing, which will provide higher performance with a large amount of data.
 
-4. Added user status (online/offline). The logic is implemented using WebSocket ([frontend](https://github.com/CrystalSystems/crystal-v2.0/blob/main/frontend/src/shared/hooks/useWebSocket/useWebSocket.js) | [backend]([</a>](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/core/engine/web/websocket.js))). Added display of the time of the last visit to the site.
+4. To search the content (this component will be published in the [repository](https://github.com/CrystalSystems/crystal-v2.0) at a later date), MongoDB Full-Text Search is used based on the [$text](https://www.mongodb.com/docs/manual/reference/operator/query/text/) operator.
 
-5. Multer has been replaced by [Sharp](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/shared/utils/sharp/sharp-upload.js).
+5. Added user status (online/offline). The logic is implemented using WebSocket ([frontend](https://github.com/CrystalSystems/crystal-v2.0/blob/main/frontend/src/shared/hooks/useWebSocket/useWebSocket.js) | [backend]([</a>](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/core/engine/web/websocket.js))). Added display of the time of the last visit to the site.
 
-6. Added the ability to upload GIF images for posts and user avatar/banner. GIFs are sanitized through [special logic](https://github.com/CrystalSystems/crystal-v2.0/blob/6c3478f5ea8bb037b4de42b0feff5f6560c753c4/backend/src/shared/utils/sharp/sharp-upload.js#L228) in [sharp-upload.js](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/shared/utils/sharp/sharp-upload.js) to ensure cybersecurity. All images except GIF are [converted](https://github.com/CrystalSystems/crystal-v2.0/blob/6c3478f5ea8bb037b4de42b0feff5f6560c753c4/backend/src/shared/utils/sharp/sharp-upload.js#L251) to WebP.
+6. Multer has been replaced by [Sharp](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/shared/utils/sharp/sharp-upload.js).
 
-7. Added the ability to specify the user's gender.
+7. Added the ability to upload GIF images for posts and user avatar/banner. GIFs are sanitized through [special logic](https://github.com/CrystalSystems/crystal-v2.0/blob/6c3478f5ea8bb037b4de42b0feff5f6560c753c4/backend/src/shared/utils/sharp/sharp-upload.js#L228) in [sharp-upload.js](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/shared/utils/sharp/sharp-upload.js) to ensure cybersecurity. All images except GIF are [converted](https://github.com/CrystalSystems/crystal-v2.0/blob/6c3478f5ea8bb037b4de42b0feff5f6560c753c4/backend/src/shared/utils/sharp/sharp-upload.js#L251) to WebP.
 
-8. On the user page, a section has been added with detailed information about the user (gender, registration date, date of user data update).
+8. Added the ability to specify the user's gender.
 
-9. Added a user privacy setting that allows you to hide gender.
+9. On the user page, a section has been added with detailed information about the user (gender, registration date, date of user data update).
 
-10. Added a user interface setting that allows you to hide all GIF images on the website.
+10. Added a user privacy setting that allows you to hide gender.
 
-11. The security system complies with [CRYSTAL v1.0  (Production)](https://shedov.top/description-and-capabilities-of-crystal-v1-0/#paragraph_7).
+11. Added a user interface setting that allows you to hide all GIF images on the website.
+
+12. The security system complies with [CRYSTAL v1.0  (Production)](https://shedov.top/description-and-capabilities-of-crystal-v1-0/#paragraph_7).
 
 **⚠️ Before using [CRYSTAL v2.0](https://github.com/CrystalSystems/crystal-v2.0) or its code in a production environment, it is strongly recommended to carefully review the implementation and assess any potential cybersecurity risks.**<br/>
 
