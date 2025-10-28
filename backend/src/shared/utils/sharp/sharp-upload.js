@@ -1,3 +1,4 @@
+// sharp-upload.js
 import fs from "fs";
 import path from "path";
 import { randomUUID } from "node:crypto";
@@ -215,8 +216,19 @@ export async function processImage(req, res, next) {
           processSemaphore.release();
           return res.status(400).json({ error: "Missing ID parameter for filename generation." });
         }
-
         let processedFile;
+
+        /*
+        ---------------------------
+        Image format normalization and sanitization
+        ---------------------------
+        */
+
+        /*
+        1. GIF file sanitization
+           If uploaded file is a GIF, validate its integrity and re-encode it safely.
+           This prevents injection of malicious frames or broken animation data.
+        */
         if (mimeType === "image/gif") {
           if (!isValidGif(fileBuffer)) {
             processSemaphore.release();
@@ -233,6 +245,15 @@ export async function processImage(req, res, next) {
             mimetype: "image/gif",
             extension: "gif",
           };
+          // /GIF file sanitization
+
+
+          /*
+          2. WebP conversion and validation
+             For non-GIF images: convert input to optimized WebP format (quality=80)
+             and validate resulting file header to ensure conversion integrity.
+          */
+
         } else {
           const processedBuffer = await sharp(fileBuffer)
             .webp({ quality: 80 })
@@ -251,25 +272,53 @@ export async function processImage(req, res, next) {
             extension: "webp",
           };
         }
+        /*
+        ---------------------------
+        / Image format normalization and sanitization
+        ---------------------------
+        */
 
-        // after conversion and isValidWebP check
+        /*
+        ---------------------------
+        Post-sanitization integrity and security checks
+        ---------------------------
+        This block performs final validation after Sharp has re-encoded the image.
+        Ensures that the processed file is structurally valid, metadata-safe, 
+        and free from any malicious signatures.
+        */
+
+        /*
+        1. Validate basic image structure - ensure Sharp successfully extracted dimensions.
+        If width/height are missing, file is not a valid image (possibly corrupted or fake).
+         */
         const metadata = await sharp(processedFile.buffer).metadata();
         if (!metadata.width || !metadata.height) {
           processSemaphore.release();
           return res.status(400).json({ error: "Processed file is not a valid image." });
         }
 
-        // сheck EXIF size for security
+        /*
+        2. Check EXIF metadata size - reject files with abnormally large metadata blocks.
+        This prevents potential injection or DoS attacks via oversized EXIF payloads (>1 MB).
+        */
         if (metadata.exif && metadata.exif.length > 1024 * 1024) { // 1MB EXIF limit
           processSemaphore.release();
           return res.status(400).json({ error: "Suspiciously large metadata detected." });
         }
 
-        // check for suspicious content
+        /*
+         3. Inspect binary content for malicious signatures (e.g., "MZ" header in PE files).
+        Detects disguised executables or injected binary payloads.
+         */
         if (hasSuspiciousContent(processedFile.buffer, metadata)) {
           processSemaphore.release();
           return res.status(400).json({ error: "Suspicious file content detected." });
         }
+        /*
+        ---------------------------
+        / Post-sanitization integrity and security checks
+        ---------------------------
+        */
 
         const filename = `${id}-${randomUUID()}.${processedFile.extension}`;
         const finalPath = path.join(directory, filename);
