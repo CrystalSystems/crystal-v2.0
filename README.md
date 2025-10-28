@@ -35,9 +35,9 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 
 7. On the user page, a section has been added with detailed information about the user (gender, registration date, date of user data update).
 
-8. Added a user interface setting that allows you to hide all GIFs.
+8. Added a user privacy setting that allows you to hide gender.
 
-9. Added a user interface setting that allows you to hide all GIF images.
+9. Added a user interface setting that allows you to hide all GIF images on the website.
 
 10. The security system complies with [CRYSTAL v1.0  (Production)](https://shedov.top/description-and-capabilities-of-crystal-v1-0/#paragraph_7).
 
