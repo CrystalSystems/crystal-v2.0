@@ -1,11 +1,11 @@
 {
-  "name": "crystal-frontend--production",
+  "name": "crystal-frontend",
   "version": "2.0.0",
   "author": {
     "name": "Andrew Shedov",
     "url": "https://shedov.top"
   },
-  "homepage": "https://github.com/CrystalSystems/crystal-v2.0--production",
+  "homepage": "https://github.com/CrystalSystems/crystal-v2.0",
   "license": "MIT",
   "type": "module",
   "scripts": {
