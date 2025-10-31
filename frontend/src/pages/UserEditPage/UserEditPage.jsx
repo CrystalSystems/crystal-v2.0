@@ -732,7 +732,7 @@ export function UserEditPage() {
                     </div>
                     {/* ⚠️ ATTENTION, DANGER ZONE ❗❗❗
 Before enabling the custom field, thoroughly review your country's legislation, as it may entail criminal liability, when using this field in a production environment in some countries.
-After deleting or commenting out this code, gender customization will be enabled, related code in - user.controller.js ⬇️ */}
+After uncommenting this code, gender customization will be enabled, related code in - user.controller.js ⬇️ */}
 
                     {/* <div className={styles.custom_gender_wrap}>
                       <input
@@ -755,7 +755,7 @@ After deleting or commenting out this code, gender customization will be enabled
 
                     {/* /⚠️ ATTENTION, DANGER ZONE ❗❗❗⬆️
 Before enabling the custom field, thoroughly review your country's legislation, as it may entail criminal liability, when using this field in a production environment in some countries.
-After deleting or commenting out this code, gender customization will be enabled, related code in - user.controller.js */}
+After uncommenting this code, gender customization will be enabled, related code in - user.controller.js */}
                   </div>
                   {saveGender.isError && (
                     <div className={styles.gender_error}>
