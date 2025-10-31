@@ -454,14 +454,14 @@ export function UserEditPage() {
     userBio,
   ]);
 
-  // Состояния для пола
+  // Conditions for gender
   const [
     changeGenderFormStatus,
     setChangeGenderFormStatus
   ] = useState(false);
   const [customGender, setCustomGender] = useState('');
 
-  // Мутация для сохранения пола
+  // Mutation for sex preservation
   const saveGender = useMutation({
     mutationKey: ['saveGender'],
     mutationFn: (fields) => {
@@ -478,25 +478,25 @@ export function UserEditPage() {
     },
   });
 
-  // Обработчики для пола
+  // Floor treatments
   const onClickGender = (genderType) => {
-    const fields = { gender: { type: genderType } }; // Без customValue
-    saveGender.mutate(fields); // Отправляем сразу в базу
-    // setChangeGenderFormStatus(false); // Закрываем меню
+    const fields = { gender: { type: genderType } }; // Without customValue
+    saveGender.mutate(fields); // We send it directly to the database
+    // setChangeGenderFormStatus(false); // Close the menu
     setCustomGender('');
   };
 
   const onClickCustomGender = () => {
     setChangeGenderFormStatus(!changeGenderFormStatus);
-    setCustomGender(''); // Очищаем поле при открытии/закрытии
+    setCustomGender(''); // Clearing the field when opening/closing
   };
 
   const onSubmitCustomGender = () => {
     if (customGender.trim().length > 0 && customGender.length <= 50) {
       const fields = { gender: { type: 'custom', customValue: customGender } };
-      saveGender.mutate(fields); // Отправляем сразу в базу
-      // setChangeGenderFormStatus(false); // Закрываем форму
-      setCustomGender(''); // Очищаем поле
+      saveGender.mutate(fields); // We send it directly to the database
+      // setChangeGenderFormStatus(false); // Close the form
+      setCustomGender(''); // Clearing the field
     }
   };
 
@@ -504,10 +504,10 @@ export function UserEditPage() {
     setCustomGender(e.target.value);
   };
 
-  // Функция для формирования текста кнопки
+  // Function for generating button text
   const getGenderButtonText = () => {
     if (changeGenderFormStatus) {
-      return t("UserEditPage.Hide"); // Если меню открыто, показываем "Скрыть"
+      return t("UserEditPage.Hide"); //If the menu is open, show "Hide"
     }
 
     const genderType = authorizedUser?.profile?.gender?.type || 'unspecified';
@@ -525,13 +525,13 @@ export function UserEditPage() {
     );;
   };
 
-  // Обработчик для скрытия/показа пола
+  // Handler for hiding/showing the floor
   const onClickHideGender = () => {
     const newHideGenderValue = !authorizedUser?.settings.privacy.hideGender;
     hideGender.mutate(newHideGenderValue);
   };
 
-  // Мутация для скрытия/показа пола
+  // Mutation for concealment/display of gender
   const hideGender = useMutation({
     mutationKey: ['hideGender'],
     mutationFn: (hideGender) => {
