@@ -43,7 +43,7 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 
 11. Added a user interface setting that allows you to hide all GIF images on the website.
 
-12. Offset pagination was replaced with cursor pagination in the sections for displaying user likes and posts with a specific hashtag, to increase productivity.
+12. To increase performance, offset pagination was replaced with cursor pagination in the sections for displaying user likes and posts with a specific hashtag.
 
 13. The security system complies with [CRYSTAL v1.0  (Production)](https://shedov.top/description-and-capabilities-of-crystal-v1-0/#paragraph_7).
 
