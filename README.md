@@ -43,7 +43,9 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 
 11. Added a user interface setting that allows you to hide all GIF images on the website.
 
-12. The security system complies with [CRYSTAL v1.0  (Production)](https://shedov.top/description-and-capabilities-of-crystal-v1-0/#paragraph_7).
+12. In the section for displaying user likes, offset pagination has been replaced with cursor pagination to increase performance.
+
+13. The security system complies with [CRYSTAL v1.0  (Production)](https://shedov.top/description-and-capabilities-of-crystal-v1-0/#paragraph_7).
 
 **⚠️ Before using [CRYSTAL v2.0](https://github.com/CrystalSystems/crystal-v2.0) or its code in a production environment, it is strongly recommended to carefully review the implementation and assess any potential cybersecurity risks.**<br/>
 
