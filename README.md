@@ -37,7 +37,7 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 
 8. Added the ability to specify the user's gender.
 
-9. On the user page, a section has been added with detailed information about the user (gender, registration date, date of user data update).
+9. On the user page, a section has been added with detailed information about the user: gender, registration date.
 
 10. Added a user privacy setting that allows you to hide gender.
 
