@@ -111,7 +111,7 @@ console.log(authorizedUser)
         </div>
       )}
       {isSuccess && posts.length === 0 && (
-        <p className={styles.no_posts_message}>Постов пока нет.</p>
+        <p className={styles.no_posts_message}>There are no posts yet..</p>
       )}
     </div>
   );
