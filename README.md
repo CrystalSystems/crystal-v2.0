@@ -19,6 +19,7 @@ NPM v11.3.0.<br/>
 PM2 v5.4.3.<br/>
 Vite v6.1.0.<br/>
 
+A more convenient [description](https://shedov.top/description-and-capabilities-of-crystal-v2-0/) of this version is on the website [shedov.top](https://shedov.top/).<br/>
 Functionally, this version is almost completely identical to [CRYSTAL v1.0](https://shedov.top/description-and-capabilities-of-crystal-v1-0/), but has a number of key improvements:
 
 1. Mongoose has been removed and replaced by [native driver](https://www.npmjs.com/package/mongodb) MongoDB.
