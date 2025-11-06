@@ -215,7 +215,7 @@ export const updateUser = async (req, res) => {
 // update user settings
 export const updateUserSettings = async (req, res) => {
   try {
-    const userId = req.params.userId;
+    const userId = req.params.userId; // customId ("AndrewShedov")
     const { hideGif, hideGender } = req.body;
 
     // Input data validation
@@ -223,14 +223,9 @@ export const updateUserSettings = async (req, res) => {
       return res.status(400).json({ message: "hideGif and hideGender must be boolean values" });
     }
 
-    const user = await users().findOne({ customId: userId }, COLLATION_OPTIONS);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
     // Generating updates
     const updates = {
-      updatedAt: new Date(), // Manually updating the timestamp
+      updatedAt: new Date(), // Гарантируем изменение
     };
     if (typeof hideGif === 'boolean') {
       updates['settings.interface.hideGif'] = hideGif;
@@ -239,18 +234,25 @@ export const updateUserSettings = async (req, res) => {
       updates['settings.privacy.hideGender'] = hideGender;
     }
 
-    const result = await users().findOneAndUpdate(
-      { _id: user._id },
+    // 1. Атомарное обновление с использованием updateOne (не возвращает документ, но быстрее)
+    // 💡 Мы используем updateOne, который гарантированно обновляет и возвращает count
+    const result = await users().updateOne(
+      { customId: userId },
       { $set: updates },
-      { returnDocument: 'after' }
+      {
+        ...COLLATION_OPTIONS
+      }
     );
 
-    if (!result.value) {
-      return res.status(404).json({ message: "User not found after update" });
+    // Проверка, что пользователь был найден и изменен
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ message: "User not found" });
     }
 
-    // return the data from the query, since we don't need the entire document.
+    // 2. УСПЕХ: Возвращаем сообщение об успехе, как было в Mongoose
+    // 💡 Теперь мы точно знаем, что база обновилась, и фронтенд может обновить себя сам
     res.status(200).json({ message: "Settings updated", hideGif, hideGender });
+
   } catch (error) {
     handleServerError(res, error);
   }

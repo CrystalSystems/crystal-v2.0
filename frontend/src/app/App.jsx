@@ -1,3 +1,4 @@
+// frontend/src/app/App.jsx
 import {
   Routes,
   Route,

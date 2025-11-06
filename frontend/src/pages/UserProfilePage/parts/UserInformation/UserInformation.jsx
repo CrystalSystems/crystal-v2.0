@@ -122,7 +122,7 @@ export function UserInformation() {
   });
 
   useEffect(() => {
-    setUserHavePost(userPosts.data?.length > 0 ? userPosts.data : false);
+    setUserHavePost(userPosts.data?.totalPosts > 0 ? true : false);
   }, [userPosts]);
 
   const user = useQuery({
@@ -160,7 +160,7 @@ export function UserInformation() {
     databaseAvatarUri,
     setDatabaseAvatarUri
   ] = useState();
- 
+
   const [fileAvatarUrl, setFileAvatarUrl] = useState();
   const [fileAvatar, setFileAvatar] = useState();
   // /avatar useState
@@ -426,13 +426,13 @@ export function UserInformation() {
   const formattedLastSeen = useFormattedLastSeenDate(user?.data?.status?.lastSeen, genderType);
 
   const formattedLastSeenShort = useFormattedLastSeenDateShort(user.data?.status.lastSeen);
- 
+
   // spawn timer for lastSeenShort
   const [
     isVisibleLastSeenShort,
     setIsVisibleLastSeenShort
   ] = useState(false);
- 
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisibleLastSeenShort(true);
@@ -649,7 +649,7 @@ export function UserInformation() {
                     </div>
                   ) : (
 
-                    //изначально - isVisibleLastSeenShort &&
+                    //initially - isVisibleLastSeenShort &&
                     (isVisibleLastSeenShort && user.data?.status.lastSeen) && (
 
                       <div className={styles.last_seen_short_icon}

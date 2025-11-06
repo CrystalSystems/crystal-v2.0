@@ -29,12 +29,11 @@
   min-width: 185px;
   max-width: 185px;
 }
- 
 }
 
 @media (max-width: 1060px) {
   .right_side {
-    min-width: auto;
+    /* min-width: auto; */
   }
 }
 

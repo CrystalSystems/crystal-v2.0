@@ -1,4 +1,16 @@
+// formatLinksInText.jsx
+
 import { Link } from 'react-router-dom';
+
+// Regular expression for any Unicode letters (\p{L}), numbers, hyphens and underscores.
+// This set ensures that the tag is safe to use in a URL.
+const HASHTAG_VALIDATION_REGEX = /^[\p{L}0-9_-]+$/u;
+
+// Checking the validity of a tag to convert into a link.
+const isTagValidForLink = (tag) => {
+  // The check is carried out on a tag without the '#' symbol.
+  return HASHTAG_VALIDATION_REGEX.test(tag);
+};
 
 const stripEndingPunctuation = (str = '') => {
   const match = str.match(/^(.+?)([.,)(])?$/);
@@ -38,11 +50,18 @@ export const formatLinksInText = (text = '') => {
 
       if (core.startsWith('#')) {
         const tag = core.slice(1);
-        return (
-          <span key={`tag-${lineIndex}-${wordIndex}`}>
-            <Link to={`/hashtags/${tag}`}>#{tag}</Link>{punctuation + ' '}
-          </span>
-        );
+
+        // We turn only valid hashtags into links
+        if (isTagValidForLink(tag)) {
+          return (
+            <span key={`tag-${lineIndex}-${wordIndex}`}>
+              <Link to={`/hashtags/${tag}`}>#{tag}</Link>{punctuation + ' '}
+            </span>
+          );
+        }
+
+        // If the tag is invalid, return it as plain text
+        return str + ' ';
       }
 
       if (core.startsWith('http://') || core.startsWith('https://')) {
@@ -54,7 +73,8 @@ export const formatLinksInText = (text = '') => {
               rel="noreferrer noopener"
             >
               {formatDisplayUrl(core)}
-            </Link>{punctuation + ' '}
+            </Link>
+            {punctuation + ' '}
           </span>
         );
       }
@@ -62,9 +82,11 @@ export const formatLinksInText = (text = '') => {
       return str + ' ';
     });
 
-    return lineIndex < lines.length - 1
-      ? [...jsxWords, <br key={`br-${lineIndex}`} />]
-      : jsxWords;
+    if (lineIndex < lines.length - 1) {
+      jsxWords.push(<br key={`br-${lineIndex}`} />);
+    }
+
+    return jsxWords;
   });
 
   return formatted;

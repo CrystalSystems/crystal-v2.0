@@ -66,10 +66,10 @@
 }
 
 .avatar img {
-  width: 36px;
-  min-width: 36px;
-  height: 36px;
-  min-height: 36px;
+  width: 42px;
+  min-width: 42px;
+  height: 42px;
+  min-height: 42px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -109,8 +109,8 @@
   fill: var(--fill_no_avatar_global);
   stroke: var(--fill_no_avatar_global);
   stroke-width: 1.2px;
-  width: 36px;
-  height: 36px;
+  width: 43px;
+  height: 43px;
 }
 
 .name_id_wrap {
@@ -247,6 +247,18 @@
   .avatar_name_id_wrap {
     display: grid;
     justify-content: center;
+  }
+
+  .avatar img {
+    width: 43px;
+    min-width: 43px;
+    height: 43px;
+    min-height: 43px;
+  }
+
+  .gif_circle_icon svg {
+    width: 44px;
+    height: 44px;
   }
 }
 

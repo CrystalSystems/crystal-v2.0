@@ -128,13 +128,13 @@
 [data-left-side-dark-theme="true"] {
   --logo_wrap_background-color: #0000004b;
   --logo_margin_left: 3px;
-  --logo_left: 7px;
+  --logo_left: 8px;
 }
 
 [data-left-side-dark-theme="false"] {
   --logo_wrap_background-color: rgba(255, 255, 255, 0.449);
   --logo_margin_left: 0px;
-  --logo_left: 5.5px;
+  --logo_left: 5px;
 }
 
 /* /variables */

@@ -16,18 +16,14 @@ import styles from './HashtagPage.module.css';
 export function HashtagPage() {
   const { tag } = useParams();
   const link = '/posts/hashtags';
-  
+  console.log(tag)
   // Authorized user
   const { authorizedUser } = useAuthData(); 
 
   const getPostsPage = async ({ cursor, limitPosts = 5 }) => {
-    const authId = authorizedUser?._id;
+  
     const params = { limit: limitPosts, tag };
     
-    // Add ID to params if the user is authorized
-    if (authId) {
-        params.authorizedUserId = authId;
-    }
 
     if (cursor) {
       params.cursor = cursor;
@@ -46,7 +42,7 @@ export function HashtagPage() {
     error,
   } = useInfiniteQuery({
     // Add ID to queryKey to reset data when logging in/out
-    queryKey: ['posts', 'hashtagPagePosts', tag, authorizedUser?._id], 
+    queryKey: ['posts', 'hashtagPagePosts', tag], 
     queryFn: ({ pageParam }) => getPostsPage({ cursor: pageParam }),
     initialPageParam: null,
     refetchOnWindowFocus: true,

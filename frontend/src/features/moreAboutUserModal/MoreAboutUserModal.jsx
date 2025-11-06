@@ -90,12 +90,6 @@ export function MoreAboutUserModal() {
   );
   // /format registration date
 
-  // format update date
-  const update = useFormattedRegistrationDate(
-    user?.data?.updatedAt
-  );
-  // /format update date
-
   return (
     <>
       {showMoreAboutUserModal && (
@@ -151,9 +145,6 @@ export function MoreAboutUserModal() {
                         </div>
                         <div className={styles.registration_date}>
                           <p><strong>{t("MoreAboutUserModal.Registration")}:</strong></p> {registration?.element}
-                        </div>
-                        <div className={styles.registration_date}>
-                          <p><strong>{t("MoreAboutUserModal.Update")}:</strong></p> {update?.element}
                         </div>
                       </div>
 

@@ -110,9 +110,9 @@ export function UserPagePostsWrap() {
           </div>
         </div>
       )}
-      {isSuccess && posts.length === 0 && (
+      {/* {isSuccess && posts.length === 0 && (
         <p className={styles.no_posts_message}>There are no posts yet..</p>
-      )}
+      )} */}
     </div>
   );
 }

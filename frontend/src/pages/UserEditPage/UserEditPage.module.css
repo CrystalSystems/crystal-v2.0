@@ -123,6 +123,7 @@
   height: 100%;
   background-color: white;
 }
+
 /* /hide icon - 'no image'*/
 
 .no_avatar_icon svg {
@@ -137,8 +138,8 @@
 .user_online_status_circle_icon_avatar {
   position: absolute;
   z-index: 1;
-  top: 44.5px;
-  left: 37px;
+  top: 41px;
+  left: 42px;
 }
 
 .user_online_status_circle_icon_avatar svg {

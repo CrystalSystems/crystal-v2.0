@@ -5,7 +5,6 @@ import {
   useCallback,
   useMemo
 } from "react";
-import { useSelector } from 'react-redux';
 import {
   useParams,
   Navigate
@@ -96,8 +95,7 @@ export function LikesPage() {
         />
       );
     });
-  }, [data, lastPostRef, hasNextPage]);
-
+  }, [data, lastPostRef, hasNextPage]); 
 
   const isAccessDeniedError = isError && error?.response?.status === 403;
 
@@ -134,11 +132,11 @@ export function LikesPage() {
         }
 
         {/* Message if there are no likes */}
-        {isSuccess && posts.length === 0 && (
+        {/* {isSuccess && posts.length === 0 && (
           <p className={styles.no_likes_message}>
             {t('LikesPage.NoLikes')}
           </p>
-        )}
+        )} */}
 
         {/* Post output */}
         {isSuccess && posts}

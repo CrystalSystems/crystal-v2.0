@@ -3,7 +3,8 @@ import { promises as fsPromises } from 'fs';
 import path from 'path';
 import {
     handleServerError,
-    takeHashtags
+    takeHashtags,
+    validateHashtagsForPost
 } from '../../shared/helpers/index.js';
 import {
     getDB
@@ -119,17 +120,18 @@ const getPostLookupPipelineFeed = (authorizedUserId) => {
 // create post
 export const createPost = async (req, res) => {
     try {
-        const combiningTitleAndText = (req.body?.title + ' ' + req.body.text).split(/[\s\n\r]/gmi).filter(v => v.startsWith('#'));
-        const newHashtags = takeHashtags(combiningTitleAndText).map(tag => tag.replace(/^#/, '').toLowerCase());
+        const combiningTitleAndText = (req.body?.title + ' ' + req.body.text)
+            .split(/[\s\n\r]/gmi)
+            .filter(v => v.startsWith('#'));
 
-        if (newHashtags.length > 30) {
+        // We receive only valid, clean and unique tags (without #)
+        const newHashtags = takeHashtags(combiningTitleAndText);
+
+        // Centralized check for quantity and length hashtags
+        const validationResult = validateHashtagsForPost(newHashtags);
+        if (!validationResult.valid) {
             return res.status(400).json({
-                message: 'Maximum 30 hashtags allowed'
-            });
-        }
-        if (newHashtags.some(tag => tag.length > 70)) {
-            return res.status(400).json({
-                message: 'Each hashtag must be 70 characters or less'
+                message: validationResult.message
             });
         }
 
@@ -160,7 +162,7 @@ export const createPost = async (req, res) => {
 
         if (newHashtags.length > 0) {
             const hashtagDocs = newHashtags.map((tag) => ({
-                name: tag,
+                name: tag, // Only valid tags here
                 postId,
                 postCreatedAt,
                 createdAt: new Date(),
@@ -197,19 +199,22 @@ export const updatePost = async (req, res) => {
 
         const postImage = req.body.mainImageUri;
         const postText = req.body.text;
-        const combiningTitleAndText = (req.body?.title + ' ' + req.body.text).split(/[\s\n\r]/gmi).filter(v => v.startsWith('#'));
-        const newHashtags = takeHashtags(combiningTitleAndText).map(tag => tag.replace(/^#/, '').toLowerCase());
 
-        if (newHashtags.length > 30) {
+        const combiningTitleAndText = (req.body?.title + ' ' + req.body.text)
+            .split(/[\s\n\r]/gmi)
+            .filter(v => v.startsWith('#'));
+
+        // We receive only valid, clean and unique tags (without #)
+        const newHashtags = takeHashtags(combiningTitleAndText);
+
+        // Centralized check for quantity and length
+        const validationResult = validateHashtagsForPost(newHashtags);
+        if (!validationResult.valid) {
             return res.status(400).json({
-                message: 'Maximum 30 hashtags allowed'
+                message: validationResult.message
             });
         }
-        if (newHashtags.some(tag => tag.length > 70)) {
-            return res.status(400).json({
-                message: 'Each hashtag must be 70 characters or less'
-            });
-        }
+
         if (!(postImage || (postText.length >= 1))) {
             return res.status(400).json({
                 message: 'Post should not be empty'
@@ -250,13 +255,14 @@ export const updatePost = async (req, res) => {
 
         const postCreatedAt = post.createdAt;
 
+        // 3. Hashtag logic: Delete old and insert new
         await hashtags().deleteMany({
             postId: postIdObject
         });
 
         if (newHashtags.length > 0) {
             const hashtagDocs = newHashtags.map((tag) => ({
-                name: tag,
+                name: tag, // Only valid tags here
                 postId: postIdObject,
                 postCreatedAt: postCreatedAt,
                 createdAt: new Date(),
@@ -273,6 +279,7 @@ export const updatePost = async (req, res) => {
             }
             );
         }
+        // /Hashtag logic
 
         res.status(200).json({
             postId: req.params.postId,
@@ -483,8 +490,18 @@ export const getPostsByUser = async (req, res) => {
 export const getPostsByHashtag = async (req, res) => {
     try {
         const limit = parseInt(req.query.limit) || 10;
+        // Тег приходит из URL (useParams), мы ищем его в базе в нижнем регистре
         const hashtag = req.query.tag.toLowerCase();
 
+        // 💡 UPDATED: Удалена вся логика извлечения authorizedUserId из Query
+        // Устанавливаем в undefined, чтобы getPostLookupPipelineFeed работал корректно, 
+        // но при этом не включал логику isLikedByMe для неавторизованных, если это не заложено в pipeline.
+        let authorizedUserId = undefined;
+
+        // ...
+
+        // 💡 СТАРАЯ ЛОГИКА (УДАЛЕНА):
+        /*
         // Extracting the authorized user ID from the Query Parameter
         let authorizedUserId = req.query.authorizedUserId;
 
@@ -494,6 +511,7 @@ export const getPostsByHashtag = async (req, res) => {
         } else {
             authorizedUserId = undefined;
         }
+        */
 
         // Pagination logic
         let hashtagQuery = { name: hashtag };
@@ -524,7 +542,7 @@ export const getPostsByHashtag = async (req, res) => {
         const fetchedPosts = await posts().aggregate([
             { $match: { _id: { $in: postIds } } },
             // We pass the converted authorizedUserId
-            ...getPostLookupPipelineFeed(authorizedUserId)
+            ...getPostLookupPipelineFeed()
         ]).toArray();
 
         const resultPosts = fetchedPosts.sort((a, b) => {

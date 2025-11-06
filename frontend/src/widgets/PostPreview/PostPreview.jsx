@@ -44,6 +44,56 @@ import {
 
 import styles from './PostPreview.module.css';
 
+// 💡 НОВАЯ ФУНКЦИЯ: Обновляет кэш TanStack Query по _id поста
+function updateCacheByPostId(queryClient, postId, newLikedStatus) {
+  // Нацеливаемся на все кэши, начинающиеся с ['posts']
+  queryClient.setQueriesData({ queryKey: ['posts'] }, (oldData) => {
+    if (!oldData) return oldData;
+
+    // 🚀 КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ: Проверяем, что это инфинит-квери (должно быть поле pages)
+    // Если это не инфинит-квери (например, одиночный пост), мы пропускаем его.
+    if (!oldData.pages) {
+      // Если это одиночный пост, который мы хотим обновить:
+      if (oldData._id === postId) {
+        return {
+          ...oldData,
+          isLikedByMe: newLikedStatus,
+          likesCount: newLikedStatus ? oldData.likesCount + 1 : oldData.likesCount - 1,
+        };
+      }
+      return oldData;
+    }
+
+    return {
+      ...oldData,
+      // Проходимся по всем страницам (для useInfiniteQuery)
+      pages: oldData.pages.map(page => ({
+        ...page,
+        posts: page.posts.map(post => {
+          // Если нашли нужный пост, обновляем его статус и счетчик
+          if (post._id === postId) {
+            const currentCount = post.likesCount;
+            let newCount = currentCount;
+
+            if (post.isLikedByMe !== newLikedStatus) {
+              newCount = newLikedStatus ? currentCount + 1 : currentCount - 1;
+            }
+
+            return {
+              ...post,
+              isLikedByMe: newLikedStatus,
+              likesCount: newCount > 0 ? newCount : 0,
+            };
+          }
+          return post;
+        })
+      }))
+    };
+  });
+}
+// /НОВАЯ ФУНКЦИЯ
+
+
 export const PostPreview = forwardRef(function Post(props, lastPostRef) {
 
   // authorized user
@@ -62,10 +112,10 @@ export const PostPreview = forwardRef(function Post(props, lastPostRef) {
   const linkToUserProfile = window.location.origin + '/' + post.data.user?.customId;
   const userAvatar = API_BASE_URL + post.data.user?.avatarUri;
   const mainImage = API_BASE_URL + post.data.mainImageUri;
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient(); // 💡 queryClient уже был
 
   const { userOnline } = useUserStatus(post?.data?.user?.customId, { delay: 100 });
- 
+
   // menu - post options
   const menuPostOptions = useRef();
   const [showMenuPostOptions, setShowMenuPostOptions] = useState(false);
@@ -144,42 +194,52 @@ export const PostPreview = forwardRef(function Post(props, lastPostRef) {
   // /post options
 
   // add like and scheck authorized user
-  // 🌟 ИЗМЕНЕНО: Инициализация состояний из новых полей, возвращаемых бэкендом
   const [userLiked, setUserLiked] = useState(post.data?.isLikedByMe || false);
   const [numberLiked, setNumberLiked] = useState(post.data?.likesCount || 0);
 
-console.log(post.data?.isLikedByMe)
-
-  // ❌ УДАЛЕН старый useEffect для ручного расчета статуса лайка
-
   const onClickAddLike = async () => {
-    // Проверка авторизации
     if (!authorizedUser) {
       dispatch(setShowAccessModal(true));
       return;
     }
 
-    // 1. Оптимистическое обновление UI
+    const postId = post.data._id;
     const currentlyLiked = userLiked;
-    setUserLiked(!currentlyLiked);
+    const newLikedStatus = !currentlyLiked;
+
+    // 1. 💡 Optimistic UI & Cache update: Мгновенно обновляем локальный стейт и кэш
+    // 💡 Это гарантирует, что даже если пост виден на 5 разных страницах, он обновится везде сразу
+    updateCacheByPostId(queryClient, postId, newLikedStatus);
+    setUserLiked(newLikedStatus);
     setNumberLiked(currentlyLiked ? numberLiked - 1 : numberLiked + 1);
 
-    // 2. Выполнение запроса к API (без body, ID пользователя берется из middleware)
+    // 2. Making an API request
     try {
-      const response = await httpClient.patch(`/posts/${post.data._id}/like`);
-      
-      // 3. Обновление UI по ответу (если ответ от бэкенда отличается от оптимистичного)
-      if (response.liked !== undefined && response.liked !== !currentlyLiked) {
-          // Откат к состоянию, которое прислал бэкенд
-          setUserLiked(response.liked);
-          // Корректируем счетчик
-          setNumberLiked(response.liked ? numberLiked + 1 : numberLiked - 1);
+      const response = await httpClient.patch(`/posts/${postId}/like`);
+
+      // 3. Update UI based on response (если бэкенд не оптимистичный, делаем роллбэк)
+      if (response.liked !== undefined && response.liked !== newLikedStatus) {
+        // Rollback to the state sent by the backend
+        const finalLikedStatus = response.liked;
+        setUserLiked(finalLikedStatus);
+        // 💡 Обновляем UI в соответствии с реальным ответом сервера
+        setNumberLiked(finalLikedStatus ? numberLiked + 1 : numberLiked - 1);
+        // 💡 Обновляем кэш в соответствии с реальным ответом
+        updateCacheByPostId(queryClient, postId, finalLikedStatus);
       }
+
+      // 4. 🚀 КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: Инвалидируем все запросы с ключом 'posts'
+      // Это запускает фоновый refetch для всех страниц ('posts', 'homePagePosts', 'userPagePostsWrap')
+      // и решает проблему синхронизации при переходе между страницами
+      queryClient.invalidateQueries({ queryKey: ['posts'] });
+
     } catch (error) {
-      // 4. Откат при ошибке
+      // 5. Rollback on error
       setUserLiked(currentlyLiked);
       setNumberLiked(currentlyLiked ? numberLiked + 1 : numberLiked - 1);
-      // ... здесь можно добавить обработку ошибки
+      // 💡 И возвращаем кэш в исходное состояние
+      updateCacheByPostId(queryClient, postId, currentlyLiked);
+      // ... 
     }
   };
   // /add like and scheck authorized user
@@ -353,7 +413,6 @@ console.log(post.data?.isLikedByMe)
                   <p>{formatLongNumber(post.data?.views)}</p>}
               </div>
             </div>
-            {/* 🌟 УДАЛЕН: проверка userLikedStatus и связанный с ней лоадер */}
             <div
               className={styles.post_info_bottom_part_1_2}
             >
@@ -374,7 +433,7 @@ console.log(post.data?.isLikedByMe)
                 </button>
                 <div className={styles.like_wrap}>
                   <button
-                    onClick={onClickAddLike} // 🌟 ИЗМЕНЕНО: теперь вызывает onClickAddLike напрямую
+                    onClick={onClickAddLike}
                     className={
                       userLiked ?
                         styles.like_liked

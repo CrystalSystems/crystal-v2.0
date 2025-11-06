@@ -48,7 +48,7 @@
 /* @media */
 @media (max-width: 1330px) {
   .center_full {
-      width: 95%; 
+    width: 95%;
   }
 }
 
@@ -63,7 +63,17 @@
     width: 67%;
   }
 }
- 
+
+@media (max-width: 1170px) {
+  .left_side_wrap {
+    margin-left: 10px;
+  }
+
+  .right_side_wrap {
+    margin-right: 10px;
+  }
+}
+
 @media (max-width: 1005px) {
   .left_center_right_parts_wrap {
     padding: 0 0px;
