@@ -190,8 +190,8 @@ export async function processImage(req, res, next) {
           return res.status(400).json({ error: "No file data received." });
         }
 
-        const isImageExtension = /\.(jpe?g|png|gif|webp)$/i.test(fileName);
-        const isImageMime = /^image\/(jpeg|png|gif|webp)$/.test(mimeType);
+        const isImageExtension = /\.(jpe?g|png|webp|gif)$/i.test(fileName);
+        const isImageMime = /^image\/(jpeg|png|webp|gif)$/.test(mimeType);
         console.log("Validation:", { isImageExtension, isImageMime, fileName, mimeType });
 
         if (!isImageExtension || !isImageMime) {
