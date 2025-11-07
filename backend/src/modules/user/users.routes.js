@@ -5,7 +5,6 @@ import {
   canUpdateUser
 } from "../../shared/middlewares/index.js";
 import { sharp } from "../../shared/utils/index.js";
-import { updateLastSeenMiddleware } from './user.middleware.js';
 const router = express.Router();
 
 // get users
