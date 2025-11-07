@@ -50,7 +50,7 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 
 14. Added logic for deleting old images from posts and users: after deleting/replacing images, after deleting a user or post.
 
-15. The security system complies with [CRYSTAL v1.0  (Production)](https://shedov.top/description-and-capabilities-of-crystal-v1-0/#paragraph_7).
+15. Database security system, complies with [CRYSTAL v1.0  (Production)](https://shedov.top/description-and-capabilities-of-crystal-v1-0/#paragraph_7).
 
 **⚠️ Before using [CRYSTAL v2.0](https://github.com/CrystalSystems/crystal-v2.0) or its code in a production environment, it is strongly recommended to carefully review the implementation and assess any potential cybersecurity risks.**<br/>
 
