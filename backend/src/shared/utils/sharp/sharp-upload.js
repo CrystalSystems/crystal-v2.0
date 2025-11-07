@@ -198,7 +198,13 @@ export async function processImage(req, res, next) {
           if (fileName.toLowerCase().endsWith(".gif") && isValidGif(fileBuffer)) {
             mimeType = "image/gif";
           } else {
-            fs.appendFileSync("upload_attempts.log", `${new Date().toISOString()} - Rejected: ${fileName}\n`);
+
+            // Logging rejected file attempts for security analysis ⬇️
+
+            // fs.appendFileSync("upload_attempts.log", `${new Date().toISOString()} - Rejected: ${fileName}\n`);
+
+            // /Logging rejected file attempts for security analysis ⬆️
+
             processSemaphore.release();
             return res.status(400).json({ error: "Only image files are allowed." });
           }
