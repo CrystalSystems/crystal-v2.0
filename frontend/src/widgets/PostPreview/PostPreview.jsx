@@ -44,16 +44,14 @@ import {
 
 import styles from './PostPreview.module.css';
 
-// 💡 НОВАЯ ФУНКЦИЯ: Обновляет кэш TanStack Query по _id поста
 function updateCacheByPostId(queryClient, postId, newLikedStatus) {
-  // Нацеливаемся на все кэши, начинающиеся с ['posts']
   queryClient.setQueriesData({ queryKey: ['posts'] }, (oldData) => {
     if (!oldData) return oldData;
 
-    // 🚀 КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ: Проверяем, что это инфинит-квери (должно быть поле pages)
-    // Если это не инфинит-квери (например, одиночный пост), мы пропускаем его.
+    // We check that this is an infinite query (there must be a pages field) 
+    // If it's not an infinite query (for example, a single post), we skip it.
     if (!oldData.pages) {
-      // Если это одиночный пост, который мы хотим обновить:
+      // If it's a single post that we want to update:
       if (oldData._id === postId) {
         return {
           ...oldData,
@@ -66,11 +64,11 @@ function updateCacheByPostId(queryClient, postId, newLikedStatus) {
 
     return {
       ...oldData,
-      // Проходимся по всем страницам (для useInfiniteQuery)
+      // We go through all pages (for useInfiniteQuery)
       pages: oldData.pages.map(page => ({
         ...page,
         posts: page.posts.map(post => {
-          // Если нашли нужный пост, обновляем его статус и счетчик
+          // If you find the post you need, update its status and counter
           if (post._id === postId) {
             const currentCount = post.likesCount;
             let newCount = currentCount;
@@ -91,8 +89,6 @@ function updateCacheByPostId(queryClient, postId, newLikedStatus) {
     };
   });
 }
-// /НОВАЯ ФУНКЦИЯ
-
 
 export const PostPreview = forwardRef(function Post(props, lastPostRef) {
 
@@ -112,7 +108,7 @@ export const PostPreview = forwardRef(function Post(props, lastPostRef) {
   const linkToUserProfile = window.location.origin + '/' + post.data.user?.customId;
   const userAvatar = API_BASE_URL + post.data.user?.avatarUri;
   const mainImage = API_BASE_URL + post.data.mainImageUri;
-  const queryClient = useQueryClient(); // 💡 queryClient уже был
+  const queryClient = useQueryClient();
 
   const { userOnline } = useUserStatus(post?.data?.user?.customId, { delay: 100 });
 
@@ -207,8 +203,8 @@ export const PostPreview = forwardRef(function Post(props, lastPostRef) {
     const currentlyLiked = userLiked;
     const newLikedStatus = !currentlyLiked;
 
-    // 1. 💡 Optimistic UI & Cache update: Мгновенно обновляем локальный стейт и кэш
-    // 💡 Это гарантирует, что даже если пост виден на 5 разных страницах, он обновится везде сразу
+    // 1. Optimistic UI & Cache update: Instantly update local state and cache
+    // This ensures that even if a post is visible on 5 different pages, it will update everywhere at once
     updateCacheByPostId(queryClient, postId, newLikedStatus);
     setUserLiked(newLikedStatus);
     setNumberLiked(currentlyLiked ? numberLiked - 1 : numberLiked + 1);
@@ -217,29 +213,28 @@ export const PostPreview = forwardRef(function Post(props, lastPostRef) {
     try {
       const response = await httpClient.patch(`/posts/${postId}/like`);
 
-      // 3. Update UI based on response (если бэкенд не оптимистичный, делаем роллбэк)
+      // 3. Update UI based on response (if the backend is not optimistic, we do a rollback)
       if (response.liked !== undefined && response.liked !== newLikedStatus) {
         // Rollback to the state sent by the backend
         const finalLikedStatus = response.liked;
         setUserLiked(finalLikedStatus);
-        // 💡 Обновляем UI в соответствии с реальным ответом сервера
+        // We update the UI in accordance with the real server response
         setNumberLiked(finalLikedStatus ? numberLiked + 1 : numberLiked - 1);
-        // 💡 Обновляем кэш в соответствии с реальным ответом
+        // We update the cache in accordance with the real answer
         updateCacheByPostId(queryClient, postId, finalLikedStatus);
       }
 
-      // 4. 🚀 КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: Инвалидируем все запросы с ключом 'posts'
-      // Это запускает фоновый refetch для всех страниц ('posts', 'homePagePosts', 'userPagePostsWrap')
-      // и решает проблему синхронизации при переходе между страницами
+      // 4. Invalidate all requests with the 'posts' key 
+      // This runs a background refetch for all pages ('posts', 'homePagePosts', 'userPagePostsWrap') 
+      // and solves the problem of synchronization when moving between pages
       queryClient.invalidateQueries({ queryKey: ['posts'] });
 
     } catch (error) {
       // 5. Rollback on error
       setUserLiked(currentlyLiked);
       setNumberLiked(currentlyLiked ? numberLiked + 1 : numberLiked - 1);
-      // 💡 И возвращаем кэш в исходное состояние
+      // return the cache to its original state
       updateCacheByPostId(queryClient, postId, currentlyLiked);
-      // ... 
     }
   };
   // /add like and scheck authorized user
