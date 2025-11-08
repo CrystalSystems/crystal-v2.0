@@ -24,9 +24,9 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 
 1. Mongoose has been removed and replaced by [native driver](https://www.npmjs.com/package/mongodb) MongoDB.
 
-2. Data schemas for all collections ([users](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/user/user.schema.js), [posts](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/post/post.schema.js), [likes](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/like/like.schema.js), [hashtags](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/hashtag/hashtag.schema.js)), defined using the standard JSON Schema and [initialized](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/core/engine/db/initializeCollections.js) in MongoDB using the <code>[$jsonSchema](https://www.mongodb.com/docs/manual/reference/operator/query/jsonSchema/#mongodb-query-op.-jsonSchema)</code>. This approach provides consistency and a common structure for documents in collections.
+2. Data schemas for all collections (<code>[users](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/user/user.schema.js)</code>, <code>[posts](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/post/post.schema.js)</code>, <code>[likes](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/like/like.schema.js)</code>, <code>[hashtags](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/hashtag/hashtag.schema.js)</code>), defined using the standard JSON Schema and [initialized](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/core/engine/db/initializeCollections.js) in MongoDB using the <code>[$jsonSchema](https://www.mongodb.com/docs/manual/reference/operator/query/jsonSchema/#mongodb-query-op.-jsonSchema)</code>. This approach provides consistency and a common structure for documents in collections.
 
-3. For [hashtags](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/hashtag/hashtag.schema.js) and [likes](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/like/like.schema.js) separate collections were created with denormalization and indexing, which will provide higher performance with a large amount of data.
+3. For <code>[hashtags](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/hashtag/hashtag.schema.js)</code> and <code>[likes](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/like/like.schema.js)</code> separate collections were created with denormalization and indexing, which will provide higher performance with a large amount of data.
 
 4. UX/UI design has been improved for larger tablet screens (iPad Pro and similar devices). The side navigation bar has become more compact, increasing the display area of ​the main content:
 
@@ -41,7 +41,7 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 <p align="center">|Screenshot 2| Improved UX/UI design, dark theme.</p>
 
 
-5. To search through post content (this component will be published in the [repository](https://github.com/CrystalSystems/crystal-v2.0) later), MongoDB full-text search is used based on the [$text](https://www.mongodb.com/docs/manual/reference/operator/query/text/) operator.
+5. To search through post content (this component will be published in the [repository](https://github.com/CrystalSystems/crystal-v2.0) later), MongoDB full-text search is used based on the <code>[$text](https://www.mongodb.com/docs/manual/reference/operator/query/text/)</code> operator.
 
 6. Added user status (online/offline). The logic is implemented using WebSocket ([frontend](https://github.com/CrystalSystems/crystal-v2.0/blob/main/frontend/src/shared/hooks/useWebSocket/useWebSocket.js) | [backend]([</a>](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/core/engine/web/websocket.js))). Added display of the time of the last visit to the site.
 
