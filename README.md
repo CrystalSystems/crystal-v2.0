@@ -52,7 +52,7 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 **— Limiting simultaneous image processing ([Semaphore](https://github.com/CrystalSystems/crystal-v2.0/blob/ca54aec0bc7a5ef96b9172d005aca608829bd05e/backend/src/shared/utils/sharp/sharp-upload.js#L38))**<br>
 To prevent processor overload during resource-intensive image processing, a semaphore mechanism is used.
 
-**— Rate Limiting ([Rate Limiting](https://github.com/CrystalSystems/crystal-v2.0/blob/ca54aec0bc7a5ef96b9172d005aca608829bd05e/backend/src/shared/utils/sharp/sharp-upload.js#L83))**<br>
+**— Request rate limiting ([Rate Limiting](https://github.com/CrystalSystems/crystal-v2.0/blob/ca54aec0bc7a5ef96b9172d005aca608829bd05e/backend/src/shared/utils/sharp/sharp-upload.js#L83))**<br>
 To protect against DDoS attacks and spam, a limit on the number of download requests from a single IP address is used.
 
 **— Limiting the size of the uploaded file**<br>
