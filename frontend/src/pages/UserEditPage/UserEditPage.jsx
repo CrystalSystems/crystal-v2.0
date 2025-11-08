@@ -38,8 +38,6 @@ import {
 
 import styles from "./UserEditPage.module.css";
 
-
-
 export function UserEditPage() {
 
   // authorized user

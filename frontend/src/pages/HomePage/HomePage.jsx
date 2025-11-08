@@ -2,7 +2,6 @@
 
 import { useRef, useCallback } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
 
 import { useAuthData } from '../../features';
 
@@ -13,21 +12,20 @@ import { httpClient } from '../../shared/api';
 import styles from './HomePage.module.css';
 
 export function HomePage() {
-  
+
   // authorized user
-  const { authorizedUser } = useAuthData(); 
-  
-console.log(authorizedUser)
+  const { authorizedUser } = useAuthData();
+  // /authorized user
 
   const getPostsPage = async ({ pageParam = 1, limitPosts = 5 }) => {
     const authId = authorizedUser?._id;
     const queryParams = { page: pageParam, limit: limitPosts };
-    
+
     // Adding a user ID to Query Parameters
     if (authId) {
-        queryParams.authorizedUserId = authId;
+      queryParams.authorizedUserId = authId;
     }
-    
+
     // console.log('Sending request with queryParams:', queryParams); 
     const response = await httpClient.get('/posts', queryParams);
     // console.log('Response from /posts:', response); 
