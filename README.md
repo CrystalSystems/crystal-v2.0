@@ -77,7 +77,7 @@ After passing the initial checks (Semaphore and Rate Limiting), the uploaded fil
 11. Added the ability to specify user gender.
 12. On the user page, a section with detailed user information has been added: gender, registration date.
 13. Added a privacy setting that allows you to hide gender.
-14. To improve performance, offset pagination has been replaced with cursor-based pagination in the user likes and posts with a specific hashtag display sections.
+14. To increase productivity, offset pagination was replaced with cursor pagination in the sections for displaying user likes, posts with a specific hashtag, and searching for posts.
 15. Added a 'Back' button.
 16. Added logic for deleting old images from posts and users: after deleting/replacing images, after deleting a user or post.
 
