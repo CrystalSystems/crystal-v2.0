@@ -85,7 +85,20 @@ After passing the initial checks (Semaphore and Rate Limiting), the uploaded fil
 
 18. Added <a href="https://github.com/CrystalSystems/crystal-v2.0/blob/main/frontend/src/shared/helpers/formatting/formatLinksInText.jsx" target="_blank" rel="noopener" >validation</a> for hashtags in the frontend. To be displayed as a clickable link, the hashtag must be validated using a regular expression — <code class="inline-code">/^[\p{L}0-9_-]+$/u</code> (Allows any Unicode letters, numbers, hyphens, and underscores).
 
-19. Database cybersecurity system complies with <a href="https://shedov.top/description-and-capabilities-of-crystal-v1-0/#paragraph_7" rel="noopener" target="_blank">CRYSTAL v1.0  (Production)</a>.
+19. Added more informative display of post creation and update dates in the
+<a href="https://github.com/CrystalSystems/crystal-v2.0/blob/main/frontend/src/pages/FullPostPage/FullPostPage.jsx" target="_blank" rel="noopener">full</a>
+and
+<a href="https://github.com/CrystalSystems/crystal-v2.0/blob/main/frontend/src/widgets/PostPreview/PostPreview.jsx" target="_blank" rel="noopener">preview</a>
+versions. Date formatting occurs in a special hook —
+<a href="https://github.com/CrystalSystems/crystal-v2.0/blob/main/frontend/src/shared/hooks/formatting/useFormattedPostDate/useFormattedPostDate.jsx" target="_blank" rel="noopener">useFormattedPostDate</a>,
+which performs localized date and time formatting in two languages ​​(Russian and English) using
+<code class="inline-code">toLocaleDateString</code> and <code class="inline-code">toLocaleTimeString</code>.
+For the English locale, a 12-hour clock is used (<code class="inline-code">Jul 4, 2025 ∙ 10:45 PM</code>),
+and for the Russian locale, a 24-hour clock (<code class="inline-code">4 июля 2025 ∙ 22:45</code>).
+The hook automatically detects the current interface language via <code class="inline-code">i18n.language</code>
+and displays the year only if the date belongs to the previous year.
+
+20. Database cybersecurity system complies with <a href="https://shedov.top/description-and-capabilities-of-crystal-v1-0/#paragraph_7" rel="noopener" target="_blank">CRYSTAL v1.0  (Production)</a>.
 
 **⚠️ Before using [CRYSTAL v2.0](https://github.com/CrystalSystems/crystal-v2.0) or its code in a production environment, it is strongly recommended to carefully review the implementation and assess any potential cybersecurity risks.**<br/>
 
