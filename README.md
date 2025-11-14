@@ -28,7 +28,15 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 
 3. For <code>[hashtags](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/hashtag/hashtag.schema.js)</code> and <code>[likes](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/like/like.schema.js)</code> separate collections were created with denormalization and indexing, which will provide higher performance with a large amount of data.
 
-4. UX/UI design has been improved for larger tablet screens (iPad Pro and similar devices). The side navigation bar has become more compact, increasing the display area of ​the main content:
+4. To search through post content, MongoDB full-text search is used based on the <code>[$text](https://www.mongodb.com/docs/manual/reference/operator/query/text/)</code> operator. **Frontend([SearchPage.jsx](https://github.com/CrystalSystems/crystal-v2.0/blob/main/frontend/src/pages/SearchPage/SearchPage.jsx), [Search.jsx](https://github.com/CrystalSystems/crystal-v2.0/blob/main/frontend/src/shared/ui/Search/Search.jsx))** | **Backend([searchPosts](https://github.com/CrystalSystems/crystal-v2.0/blob/091b35ebf4ee591cce106fc5ec315939a341606a/backend/src/modules/post/post.controller.js#L689))**:
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/gif_1.gif"/>
+</p>
+<p align="center">|GIF 1| Demonstration of the search engine.</p>
+<br>
+
+5. UX/UI design has been improved for larger tablet screens (iPad Pro and similar devices). The side navigation bar has become more compact, increasing the display area of ​the main content:
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/screenshot_1.webp"  alt="CRYSTAL v1.0 features"/>
@@ -40,8 +48,6 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 </p>
 <p align="center">|Screenshot 2| Improved UX/UI design, dark theme.</p>
 
-
-5. To search through post content (this component will be published in the [repository](https://github.com/CrystalSystems/crystal-v2.0) later), MongoDB full-text search is used based on the <code>[$text](https://www.mongodb.com/docs/manual/reference/operator/query/text/)</code> operator.
 
 6. Added user status (online/offline). The logic is implemented using WebSocket ([frontend](https://github.com/CrystalSystems/crystal-v2.0/blob/main/frontend/src/shared/hooks/useWebSocket/useWebSocket.js) | [backend]([</a>](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/core/engine/web/websocket.js))). Added display of the time of the last visit to the site.
 

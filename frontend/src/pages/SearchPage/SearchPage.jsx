@@ -1,5 +1,8 @@
 // SearchPage.jsx
-import { useRef, useCallback } from 'react';
+import {
+  useRef,
+  useCallback
+} from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
@@ -110,27 +113,16 @@ export function SearchPage() {
           : styles.title
       }>
 
-
         {!isPending && (
           <>
             {(!noResults && searchQuery) && (
-
-              <p><strong>{t("SearchPage.SearchResultsFor")}</strong> {searchQuery}</p>
-
-
-            )}
+              <p><strong>{t("SearchPage.SearchResultsFor")}</strong> {searchQuery}</p>)}
 
             {!searchQuery && (
-
-              <p><strong> {t("SearchPage.EnterYourSearchTerm")}</strong></p>
-
-            )}
+              <p><strong> {t("SearchPage.EnterYourSearchTerm")}</strong></p>)}
 
             {noResults && (
-
-              <p><strong>{t("SearchPage.NothingFoundFor")}</strong> {searchQuery}</p>
-
-            )}
+              <p><strong>{t("SearchPage.NothingFoundFor")}</strong> {searchQuery}</p>)}
 
           </>
         )}

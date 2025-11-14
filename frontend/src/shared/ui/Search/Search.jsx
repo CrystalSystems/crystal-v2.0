@@ -1,7 +1,13 @@
 //Search.jsx
 
-import { useState, useEffect } from 'react'; // 💡 MODIFIED: Добавляем useEffect
-import { useNavigate, useLocation } from 'react-router-dom'; // 💡 MODIFIED: Добавляем useLocation
+import {
+  useState,
+  useEffect
+} from 'react';
+import {
+  useNavigate,
+  useLocation
+} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
   SearchIcon,
@@ -12,21 +18,21 @@ import styles from './Search.module.css';
 
 export function Search() {
   const navigate = useNavigate();
-  const location = useLocation(); // 💡 NEW: Хук для доступа к текущему URL
+  const location = useLocation();
 
-  // 1. 💡 NEW: Логика инициализации query из адресной строки
-  // Мы будем использовать useEffect, чтобы прочитать и установить значение.
+  // 1. Logic for initializing query from the address bar
+  // We will use useEffect to read and set the value.
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    // Парсим query-параметры из текущего URL
+    // Parsing query parameters from the current URL
     const params = new URLSearchParams(location.search);
     const q = params.get('q');
 
-    // Если параметр 'q' существует, устанавливаем его в состояние query
-    // Используем '|| '' для безопасности, чтобы избежать null
+    // If the 'q' parameter exists, set it to the query state
+    // Use '|| '' for safety to avoid nulls
     setQuery(q || '');
-  }, [location.search]); // 💡 Зависимость от location.search, чтобы обновлять при смене URL
+  }, [location.search]); // Depend on location.search to update when the URL changes
 
   const darkThemeStatus = useSelector((state) => state.darkThemeStatus);
 
@@ -34,23 +40,21 @@ export function Search() {
     e.preventDefault();
     const trimmedQuery = query.trim();
 
-    // Если запрос пуст, переходим на /search без параметра 'q'
+    // If the query is empty, go to /search without the 'q' parameter
     if (trimmedQuery) {
       navigate(`/search?q=${encodeURIComponent(trimmedQuery)}`);
     } else {
-      // 💡 Если строка пуста, переходим на базовый адрес поиска, 
-      // чтобы очистить 'q' из URL (например, с /search?q=old на /search)
+      // If the line is empty, go to the base search address
       navigate('/search');
     }
   };
 
-  // 💡 MODIFIED: Функция для очистки строки поиска
+  // Function to clear the search bar
   const handleClearSearch = () => {
     setQuery('');
-    // 💡 При очистке поля, сбрасываем query-параметр в URL, 
-    // чтобы SearchPage тоже очистился
+    // When clearing a field, we reset the query parameter in the URL so that SearchPage is also cleared.
     const currentPath = location.pathname;
-    // Если мы на странице /search, переходим на /search без параметров
+    // If we are on the /search page, we go to /search without parameters
     if (currentPath.startsWith('/search')) {
       navigate('/search');
     }
@@ -63,7 +67,6 @@ export function Search() {
     >
       <form role="search" onSubmit={handleSearch}>
 
-        {/* Кнопка-крестик (X) для очистки */}
         {query && (
           <button
             type="button"
