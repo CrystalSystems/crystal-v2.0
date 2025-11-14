@@ -4,7 +4,7 @@ import { useRef, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { useAuthData } from '../../features'; 
+import { useAuthData } from '../../features';
 
 import { Loader } from '../../shared/ui';
 import { NotFoundPage } from '../../pages';
@@ -16,14 +16,20 @@ import styles from './HashtagPage.module.css';
 export function HashtagPage() {
   const { tag } = useParams();
   const link = '/posts/hashtags';
-  console.log(tag)
-  // Authorized user
-  const { authorizedUser } = useAuthData(); 
 
-  const getPostsPage = async ({ cursor, limitPosts = 5 }) => {
-  
+  // authorized user
+  const { authorizedUser } = useAuthData();
+  // authorized user
+
+  const getPostsPage = async ({ pageParam: cursor, limitPosts = 5 }) => {
+    const authId = authorizedUser?._id;
     const params = { limit: limitPosts, tag };
-    
+
+    // Add the authorized user ID to Query Parameters
+    if (authId) {
+      params.authorizedUserId = authId;
+    }
+    // /Add the authorized user ID to Query Parameters
 
     if (cursor) {
       params.cursor = cursor;
@@ -37,25 +43,22 @@ export function HashtagPage() {
     hasNextPage,
     isFetchingNextPage,
     data,
-    isPending, // <--- isPending is used for the first load
+    isPending,
     isSuccess,
     error,
   } = useInfiniteQuery({
-    // Add ID to queryKey to reset data when logging in/out
-    queryKey: ['posts', 'hashtagPagePosts', tag], 
-    queryFn: ({ pageParam }) => getPostsPage({ cursor: pageParam }),
+    queryKey: ['posts', 'hashtagPosts', tag, authorizedUser?._id],
+    queryFn: getPostsPage,
     initialPageParam: null,
-    refetchOnWindowFocus: true,
-    retry: false,
-    getNextPageParam: (lastPage) => {
-      return lastPage.nextCursor || undefined; // Cursor pagination
-    },
+    getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
 
-  const intObserver = useRef();
-  const lastPostRef = useCallback(
+  console.log(authorizedUser?._id)
+
+  const intObserver = useRef(null);
+  const lastPostRefCallback = useCallback(
     (post) => {
-      if (isFetchingNextPage) return;
+      if (isFetchingNextPage || isPending) return;
       if (intObserver.current) intObserver.current.disconnect();
       intObserver.current = new IntersectionObserver((posts) => {
         if (posts[0].isIntersecting && hasNextPage) {
@@ -68,12 +71,15 @@ export function HashtagPage() {
     [isFetchingNextPage, isPending, fetchNextPage, hasNextPage]
   );
 
+  console.log(isFetchingNextPage)
+
   const posts = data?.pages.flatMap((page) =>
     page.posts.map((post, index) => {
+
       if (page.posts.length === index + 1) {
         return (
           <PostPreview
-            ref={lastPostRef}
+            ref={lastPostRefCallback}
             data={post}
             key={post._id}
           />
@@ -87,6 +93,11 @@ export function HashtagPage() {
       );
     })
   );
+
+  if (error) {
+    return <div className={styles.error}>Ошибка загрузки постов: {error.message}</div>;
+  }
+
 
   return (
     <div className={styles.likes_page}>

@@ -307,6 +307,7 @@ export const getPost = async (req, res) => {
         // 1. Aggregation to obtain a post with full information
         const pipeline = [
             { $match: { _id: postIdObject } },
+            // pass the authorizedUserId to enable like verification
             ...getPostLookupPipelineFeed(authorizedUserId),
             { $limit: 1 }
         ];
@@ -415,7 +416,7 @@ export const getPosts = async (req, res) => {
             { $sort: { createdAt: -1 } },
             { $skip: skip },
             { $limit: limit },
-            // pass the ID obtained from the query parameter
+            // pass the authorizedUserId to enable like verification
             ...getPostLookupPipelineFeed(authorizedUserId)
         ];
 
@@ -468,7 +469,7 @@ export const getPostsByUser = async (req, res) => {
             { $sort: { createdAt: -1 } },
             { $skip: skip },
             { $limit: limit },
-            // We pass the converted ID
+            // pass the authorizedUserId to enable like verification
             ...getPostLookupPipelineFeed(authorizedUserId)
         ];
 
@@ -490,28 +491,15 @@ export const getPostsByUser = async (req, res) => {
 export const getPostsByHashtag = async (req, res) => {
     try {
         const limit = parseInt(req.query.limit) || 10;
-        // Тег приходит из URL (useParams), мы ищем его в базе в нижнем регистре
+        // The tag comes from the URL (useParams), we search for it in the database in lowercase
         const hashtag = req.query.tag.toLowerCase();
 
-        // 💡 UPDATED: Удалена вся логика извлечения authorizedUserId из Query
-        // Устанавливаем в undefined, чтобы getPostLookupPipelineFeed работал корректно, 
-        // но при этом не включал логику isLikedByMe для неавторизованных, если это не заложено в pipeline.
-        let authorizedUserId = undefined;
-
-        // ...
-
-        // 💡 СТАРАЯ ЛОГИКА (УДАЛЕНА):
-        /*
-        // Extracting the authorized user ID from the Query Parameter
         let authorizedUserId = req.query.authorizedUserId;
-
-        // Convert it to ObjectId if it exists
         if (authorizedUserId) {
             authorizedUserId = new ObjectId(authorizedUserId);
         } else {
             authorizedUserId = undefined;
         }
-        */
 
         // Pagination logic
         let hashtagQuery = { name: hashtag };
@@ -541,8 +529,8 @@ export const getPostsByHashtag = async (req, res) => {
 
         const fetchedPosts = await posts().aggregate([
             { $match: { _id: { $in: postIds } } },
-            // We pass the converted authorizedUserId
-            ...getPostLookupPipelineFeed()
+            // pass the authorizedUserId to enable like verification
+            ...getPostLookupPipelineFeed(authorizedUserId)
         ]).toArray();
 
         const resultPosts = fetchedPosts.sort((a, b) => {
@@ -551,7 +539,11 @@ export const getPostsByHashtag = async (req, res) => {
             return indexA - indexB;
         });
 
-        const nextCursor = hashtagDocs[hashtagDocs.length - 1].postCreatedAt.toISOString();
+        // check that the array is not empty before taking an element.
+        let nextCursor = null;
+        if (hashtagDocs.length > 0) {
+            nextCursor = hashtagDocs[hashtagDocs.length - 1].postCreatedAt.toISOString();
+        }
 
         return res.status(200).json({ posts: resultPosts, nextCursor });
     } catch (error) {
@@ -691,5 +683,73 @@ export const likePost = async (req, res) => {
         // but we're already handling it via `deleteOne`/`insertOne`, so
         // we're just catching common errors here.
         handleServerError(res, error, "likePost controller");
+    }
+};
+
+export const searchPosts = async (req, res) => {
+    try {
+        const limit = parseInt(req.query.limit) || 5;
+        const searchQuery = req.query.q;
+
+        if (!searchQuery || searchQuery.trim() === '') {
+            return res.status(200).json({ posts: [], nextCursor: null });
+        }
+
+        let authorizedUserId = req.query.authorizedUserId;
+        if (authorizedUserId) {
+            authorizedUserId = new ObjectId(authorizedUserId);
+        } else {
+            authorizedUserId = undefined;
+        }
+
+        const trimmedQuery = searchQuery.trim();
+
+        // 1. Search criteria: use ONLY $text
+        const searchMatchCriteria = { $text: { $search: trimmedQuery } };
+
+        // 2. Defining the cursor
+        const cursorMatch = {};
+        if (req.query.cursor) {
+            const cursorDate = new Date(req.query.cursor);
+            if (isNaN(cursorDate.getTime())) {
+                return res.status(400).json({ message: 'Invalid cursor date' });
+            }
+            // Cursor: Find posts created BEFORE the last post date
+            cursorMatch.createdAt = { $lt: cursorDate };
+        }
+
+        // 3. Final $match
+        const finalMatchCriteria = { ...searchMatchCriteria, ...cursorMatch };
+        const matchStage = { $match: finalMatchCriteria };
+
+        // 4. Main pipeline
+        const pipeline = [
+            matchStage,
+            // select sorting by date for STABILITY of CURSOR pagination.
+            // Posts will be sorted by date
+            { $sort: { createdAt: -1 } },
+            { $limit: limit },
+
+            // pass the authorizedUserId to enable like verification
+            ...getPostLookupPipelineFeed(authorizedUserId)
+        ];
+
+        const result = await posts().aggregate(pipeline).toArray();
+
+        // 5. Calculating the next cursor
+        let nextCursor = null;
+        if (result.length === limit) {
+            // The cursor is the creation date of the last post.
+            nextCursor = result[result.length - 1].createdAt.toISOString();
+        }
+
+        // 6. Answer: We return only posts and nextCursor
+        return res.status(200).json({
+            posts: result,
+            nextCursor
+        });
+
+    } catch (error) {
+        handleServerError(res, error);
     }
 };

@@ -8,9 +8,7 @@
    scrollbar-width: thin;
    overflow-y: auto;
    margin: 0 15px;
-   border: 1px solid rgb(255, 0, 0);
  }
-
 
  .modal_wrap_fade_out {
    animation: fadeOut var(--transition_opening_global) forwards;
@@ -42,34 +40,25 @@
    position: relative;
    place-self: center normal;
    margin: 15px 0;
-   border: 1px solid rgb(255, 0, 0);
    border: var(--modal_border);
    border-radius: 13px;
  }
 
  .additional_information_wrap {
-   border: 1px solid rgb(255, 0, 0);
    padding: 15px;
    background-color: var(--filling_background-color_global);
    border-radius: 12px;
  }
 
-
-
  .additional_information {
-   margin-top: 13px;
-   border: 1px solid rgb(255, 0, 0);
+   /* margin-top: 13px; */
  }
 
  .additional_information_title {
-   margin-top: 13px;
-
-   border: 1px solid rgb(255, 0, 0);
+   /* margin-top: 13px; */
  }
 
  .additional_information_title h2 {
-
-
    text-align: center;
    font-family: Arial, Helvetica, sans-serif;
    font-size: 22px;
@@ -80,8 +69,6 @@
    text-align: center;
  }
 
-
-
  .additional_information p {
    font-size: 19px;
    font-family: Arial, Helvetica, sans-serif;
@@ -90,14 +77,14 @@
  }
 
  .additional_information_content {
-  margin-top: 20px;
-  display: grid;
-  gap: 0px;
-  border: 1px solid rgb(255, 0, 0); 
+   margin-top: 7px;
+   display: grid;
+   gap: 2px;
  }
 
  .registration_date {
    display: flex;
+   flex-wrap: wrap;
    gap: 6px;
  }
 
@@ -124,6 +111,7 @@
      display: grid;
      gap: 0px;
    }
+
    .update_date {
      display: grid;
      gap: 0px;
@@ -163,24 +151,17 @@
  /* variables */
  /* theme colors */
  [data-access-modal-dark-theme="true"] {
-
    --modal_border: 1.2px solid rgb(25, 25, 25);
    --modal_background_background-color: rgba(0, 0, 0, 0.516);
    --enter_background-color: #1e1e1e;
    --enter_background-color_hover: #222222;
-
-
  }
 
  [data-access-modal-dark-theme="false"] {
-
    --enter_box-shadow: 0 4px 16px rgb(132 134 136 / 9%),
      0 2px 2px rgb(138 140 143 / 16%);
-
-
-
    --modal_border: 1.1px solid rgba(229, 229, 229, 0.776);
-   --modal_background_background-color: rgba(248, 249, 250, 0.13);
+   --modal_background_background-color: rgba(118, 118, 118, 0.332);
    --enter_background-color: white;
    --enter_background-color_hover: rgba(245, 245, 245, 0.739);
  }

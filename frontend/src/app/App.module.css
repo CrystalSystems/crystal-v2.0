@@ -36,6 +36,8 @@
 
 .right_side_wrap {
   width: 18%;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .header_mobile_wrap {

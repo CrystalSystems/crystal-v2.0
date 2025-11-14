@@ -199,7 +199,7 @@
     "Female": "female",
     "Male": "male",
     "Unspecified": "unspecified",
-    "Registration": "Registration",
+    "Registration": "Registration date",
     "Update": "Update"
   },
   "UseFormattedLastSeenDateShort": {
@@ -222,6 +222,10 @@
   "minutes_other": "minutes",
   "hours_one": "hour",
   "hours_other": "hours"
-}
-
+},
+  "SearchPage": {
+    "SearchResultsFor": "Search results for:",
+    "NothingFoundFor": "Nothing found for:",
+    "EnterYourSearchTerm":"Enter your search term"
+  }
 }

@@ -37,7 +37,7 @@
   position: relative;
   z-index: 1;
   cursor: pointer;
-  padding: 0 12px 0 0;
+  padding: 4px 10px 4px 0;
 }
 
 .user_info:active {
@@ -53,10 +53,12 @@
   top: 0;
   bottom: 0;
   right: 0;
+  z-index: 1;
 }
 
 .avatar {
   display: flex;
+  position: relative;
 }
 
 .avatar img {

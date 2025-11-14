@@ -1,4 +1,5 @@
 export { HomePage } from "./HomePage";
+export { SearchPage } from "./SearchPage";
 export { FullPostPage } from "./FullPostPage";
 export { PostCreatePage } from "./PostCreatePage";
 export { PostEditPage } from "./PostEditPage";

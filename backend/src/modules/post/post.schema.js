@@ -39,5 +39,11 @@ export const POST_SCHEMA = {
 // Indexes
 export const POST_INDEXES = [
     { key: { createdAt: -1 }, name: 'creation_time_idx' }, 
-    { key: { user: 1, createdAt: -1 }, name: 'author_timeline_idx' }, 
+    { key: { user: 1, createdAt: -1 }, name: 'author_timeline_idx' },
+    // 💡 NEW: Text index for post search
+    { 
+        key: { title: "text", text: "text" }, 
+        name: 'post_text_search_idx'
+        // Опционально: можно добавить default_language: "russian"
+    }
 ];

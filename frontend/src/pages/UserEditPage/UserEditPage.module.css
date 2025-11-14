@@ -590,7 +590,7 @@
 }
 
 .custom_gender_input.active {
-  background-color: var(--button_active);
+  /* background-color: var(--button_active); */
 }
 
 .gender_error p {

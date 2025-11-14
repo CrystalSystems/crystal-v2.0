@@ -31,6 +31,9 @@ router.patch('/:postId', auth, canUpdatePost, validation.createPost, validation.
 // get posts by hashtag
 router.get('/hashtags', controller.getPostsByHashtag);
 
+// 💡 NEW: Search posts
+router.get('/search', controller.searchPosts);
+
 // get post
 router.get('/:postId', controller.getPost);
 

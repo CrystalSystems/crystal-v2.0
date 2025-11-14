@@ -6,12 +6,13 @@
   position: fixed;
   overflow-y: auto;
   padding-left: 10px;
-  padding-right: 5px;
-  max-width: 210px;
+  padding-right: 2px;
+  min-width: 207px;
+  max-width: 207px;
 }
 
 .left_side_not_authorized_user {
-  padding-right: 5px;
+  padding-right: 2px;
 }
 
 .logo_wrap {
@@ -87,6 +88,16 @@
 }
 
 @media (max-width: 1170px) {
+
+  .left_side {
+    min-width: auto;
+  }
+
+  .left_side_not_authorized_user {
+    min-width: 182px;
+    max-width: 182px;
+  }
+
   .logo_user_not_authorized p {
     margin-left: 0px;
     display: block;

@@ -84,6 +84,14 @@ export function MoreAboutUserModal() {
   };
   // /get gender text
 
+  const genderIsHidden = user?.data?.settings.privacy.hideGender;
+
+  const genderNotSpecified = user?.data?.profile?.gender?.type == 'unspecified';
+
+  console.log(genderIsHidden)
+
+  console.log(genderNotSpecified)
+
   // format registration date
   const registration = useFormattedRegistrationDate(
     user?.data?.createdAt
@@ -140,14 +148,17 @@ export function MoreAboutUserModal() {
 
                       <div className={styles.additional_information_content}>
 
-                        <div className={styles.gender}>
-                          <p><strong>{t("MoreAboutUserModal.Gender")}:</strong> {getGenderText()}</p>
-                        </div>
+                        {(!genderIsHidden && !genderNotSpecified) && (
+                          <div className={styles.gender}>
+                            <p><strong>{t("MoreAboutUserModal.Gender")}:</strong> {getGenderText()}</p>
+                          </div>
+                        )}
+
                         <div className={styles.registration_date}>
                           <p><strong>{t("MoreAboutUserModal.Registration")}:</strong></p> {registration?.element}
                         </div>
-                      </div>
 
+                      </div>
                     </div>
                   )}
 

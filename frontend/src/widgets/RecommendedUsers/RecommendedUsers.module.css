@@ -38,6 +38,7 @@
   top: 0;
   bottom: 0;
   right: 0;
+  z-index: 1;
 }
 
 .user {
@@ -59,10 +60,14 @@
   width: 100%;
 }
 
-.avatar {
+.avatar_wrap {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.avatar {
+  position: relative;
 }
 
 .avatar img {
@@ -74,28 +79,32 @@
   object-fit: cover;
 }
 
-.no_avatar_icon {
+.no_avatar_icon_wrap {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.no_avatar_icon {
+  position: relative;
+}
+
 .no_avatar_icon svg {
   fill: var(--fill_no_avatar_global);
-  width: 36px;
-  height: 36px;
+  width: 43px;
+  height: 43px;
 }
 
 .user_online_status_circle_icon {
   position: absolute;
   z-index: 1;
-  top: 36px;
-  left: 35px;
+  top: 27px;
+  left: 30px;
 }
 
 .user_online_status_circle_icon svg {
-  width: 7.5px;
-  height: 7.5px;
+  width: 8.5px;
+  height: 8.5px;
   fill: #4bb34b;
   border-radius: 50%;
   background-color: #4bb34b;
@@ -169,6 +178,7 @@
   bottom: 11px;
   border: none;
   background-color: transparent;
+  z-index: 2;
 }
 
 .options:active {
@@ -197,6 +207,7 @@
   color: var(--subscribe_color);
   letter-spacing: 0.5px;
   border: none;
+  z-index: 2;
 }
 
 .subscribe:hover {
@@ -247,6 +258,7 @@
   .avatar_name_id_wrap {
     display: grid;
     justify-content: center;
+    gap: 5px;
   }
 
   .avatar img {
@@ -259,6 +271,11 @@
   .gif_circle_icon svg {
     width: 44px;
     height: 44px;
+  }
+
+  .user_online_status_circle_icon {
+    top: 29px;
+    left: 30px;
   }
 }
 

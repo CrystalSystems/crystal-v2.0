@@ -3,7 +3,7 @@
 }
 
 .title {
-  padding: 20px 0;
+  padding: 12px 0;
   background-color: var(--filling_background-color_global);
   border-bottom: var(--border_global);
   border-left: var(--border_disappears_in_dark_theme_global);

@@ -77,12 +77,12 @@ export function FullPostPage() {
 
   useEffect(() => {
     // check that the post ID exists before sending the request.
-    if (postId) { 
+    if (postId) {
       httpClient.post(`/posts/${postId}/view`)
-        .then(() => { 
+        .then(() => {
           // queryClient.invalidateQueries({ queryKey: ['post', postId] });
         })
-        .catch(err => { 
+        .catch(err => {
           console.error("Error during view increment:", err);
         });
     }

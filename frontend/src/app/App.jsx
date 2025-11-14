@@ -17,6 +17,7 @@ import {
 import { useWebSocket } from '../shared/hooks';
 import {
   HomePage,
+  SearchPage,
   FullPostPage,
   PostCreatePage,
   PostEditPage,
@@ -83,6 +84,9 @@ export default function App() {
 
             <Routes>
               <Route path="/" element={<HomePage />} />
+
+              {/* 💡 NEW: Search route */}
+              <Route path="/search" element={<SearchPage />} />
 
               {/* users */}
               <Route path="/:userId" element={<UserProfilePage />} />

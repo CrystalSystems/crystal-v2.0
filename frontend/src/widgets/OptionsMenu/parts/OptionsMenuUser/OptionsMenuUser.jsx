@@ -132,6 +132,7 @@ const { userOnline } = useUserStatus(authorizedUser?.customId, { delay: 100 });
       setFadeOutUserMenuList(false);
       setShowUserMenuList(false);
       queryClient.removeQueries({ queryKey: ['users'] });
+      queryClient.removeQueries({ queryKey: ['posts'] });
     },
 
     onError: (error) => {

@@ -156,6 +156,7 @@ export function AccessModal() {
       queryClient.invalidateQueries({
         queryKey: ['me'],
       });
+      queryClient.removeQueries({ queryKey: ['posts'] });
     },
 
     onError: (response) => {

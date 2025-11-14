@@ -90,28 +90,32 @@ export function RecommendedUsers() {
               <div className={styles.user}>
                 <div className={styles.avatar_name_id_wrap}>
                   {user.avatarUri ? (
-                    <div className={styles.avatar}>
-                      {user.avatarUri?.endsWith('.gif') && logInStatus && (authorizedUser?.settings.interface.hideGif ?? false) ? (
-                        <div className={styles.gif_circle_icon}>
-                          <GifInCircleIcon />
-                        </div>
-                      ) : (
-                        <img src={API_BASE_URL + user.avatarUri} alt="user avatar" loading="lazy" />
-                      )}
-                      {user.status?.isOnline ? (
-                        <div className={styles.user_online_status_circle_icon}>
-                          <UserOnlineStatusCircleIcon />
-                        </div>
-                      ) : null}
+                    <div className={styles.avatar_wrap}>
+                      <div className={styles.avatar}>
+                        {user.avatarUri?.endsWith('.gif') && logInStatus && (authorizedUser?.settings.interface.hideGif ?? false) ? (
+                          <div className={styles.gif_circle_icon}>
+                            <GifInCircleIcon />
+                          </div>
+                        ) : (
+                          <img src={API_BASE_URL + user.avatarUri} alt="user avatar" loading="lazy" />
+                        )}
+                        {user.status?.isOnline ? (
+                          <div className={styles.user_online_status_circle_icon}>
+                            <UserOnlineStatusCircleIcon />
+                          </div>
+                        ) : null}
+                      </div>
                     </div>
                   ) : (
-                    <div className={styles.no_avatar_icon}>
-                      <NoAvatarIcon />
-                      {user.status?.isOnline ? (
-                        <div className={styles.user_online_status_circle_icon}>
-                          <UserOnlineStatusCircleIcon />
-                        </div>
-                      ) : null}
+                    <div className={styles.no_avatar_icon_wrap}>
+                      <div className={styles.no_avatar_icon}>
+                        <NoAvatarIcon />
+                        {user.status?.isOnline ? (
+                          <div className={styles.user_online_status_circle_icon}>
+                            <UserOnlineStatusCircleIcon />
+                          </div>
+                        ) : null}
+                      </div>
                     </div>
                   )}
                   <div className={styles.name_id_wrap}>

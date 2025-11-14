@@ -461,12 +461,12 @@ export function MoreIcon() {
 };
 export function SearchIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="11" cy="11" r="5.5" strokeWidth="1.2" />
+    <svg viewBox="8 3.5 9 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="11" cy="11" r="5.5" strokeWidth="1.1" />
       <path
         d="M15 15L19 19"
         strokeLinecap="round"
-        strokeWidth="1.2"
+        strokeWidth="1.1"
         strokeLinejoin="round"
       />
     </svg>
@@ -785,6 +785,16 @@ export function UserOnlineStatusCircleIcon() {
 
     <svg viewBox="8.5 2.8 7 18.5" xmlns="http://www.w3.org/2000/svg">
       <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" />
+    </svg>
+  );
+};
+
+export function DeleteTextInSearchIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9 9L15 15" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"></path>
+      <path d="M15 9L9 15" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"></path>
+      <circle cx="12" cy="12" r="9" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"></circle>
     </svg>
   );
 };

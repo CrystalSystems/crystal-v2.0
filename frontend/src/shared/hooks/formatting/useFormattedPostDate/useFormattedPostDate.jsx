@@ -1,6 +1,8 @@
+// useFormattedPostDate.jsx
+
 // formats the date as follows:
-// Jul 4, 2025 dot 10:45 PM
-// 4 июля 2025 dot 22:45
+// Jul 4, 2025 ∙ 10:45 PM
+// 4 июля 2025 ∙ 22:45
 
 import { useTranslation } from 'react-i18next';
 

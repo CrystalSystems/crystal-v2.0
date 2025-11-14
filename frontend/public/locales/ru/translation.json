@@ -200,7 +200,7 @@
     "Female": "женский",
     "Male": "мужской",
     "Unspecified": "не указан",
-    "Registration": "Регистрация",
+    "Registration": "Дата регистрации",
     "Update": "Обновление"
   },
   "UseFormattedLastSeenDateShort": {
@@ -214,22 +214,26 @@
     "key_many": "л",
     "key_other": "л"
   },
- "UseFormattedLastSeenDate": {
-  "prefix_male": "Заходил",
-  "prefix_female": "Заходила",
-  "prefix_unspecified": "Заходил(а)",
-  "ago": "назад",
-  "yesterday": "вчера",
-  "at": "в",
-  "seconds_one": "секунду",
-  "seconds_few": "секунды",
-  "seconds_many": "секунд",
-  "minutes_one": "минуту",
-  "minutes_few": "минуты",
-  "minutes_many": "минут",
-  "hours_one": "час",
-  "hours_few": "часа",
-  "hours_many": "часов"
-}
-
+  "UseFormattedLastSeenDate": {
+    "prefix_male": "Заходил",
+    "prefix_female": "Заходила",
+    "prefix_unspecified": "Заходил(а)",
+    "ago": "назад",
+    "yesterday": "вчера",
+    "at": "в",
+    "seconds_one": "секунду",
+    "seconds_few": "секунды",
+    "seconds_many": "секунд",
+    "minutes_one": "минуту",
+    "minutes_few": "минуты",
+    "minutes_many": "минут",
+    "hours_one": "час",
+    "hours_few": "часа",
+    "hours_many": "часов"
+  },
+  "SearchPage": {
+    "SearchResultsFor": "Результаты поиска для:",
+    "NothingFoundFor": "Ничего не найдено для:",
+    "EnterYourSearchTerm":"Введите запрос для поиска"
+  }
 }

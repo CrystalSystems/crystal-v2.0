@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
-import styles from "./PostSourceMenu.module.css";
 import { useTranslation } from "react-i18next";
+
+import styles from "./PostSourceMenu.module.css";
 
 export function PostSourceMenu() {
   const { t } = useTranslation();

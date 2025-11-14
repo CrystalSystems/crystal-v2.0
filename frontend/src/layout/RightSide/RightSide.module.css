@@ -7,8 +7,8 @@
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 5px;
-  min-width: 210px;
-  max-width: 210px;
+  min-width: 207px;
+  max-width: 207px;
 }
 
 .options_menu {
@@ -20,20 +20,14 @@
   background-color: var(--options_menu_background-color);
   backdrop-filter: saturate(180%) blur(2px);
   -webkit-backdrop-filter: saturate(180%) blur(2px);
-  z-index: 2;
+  z-index: 3;
   min-height: 40px;
 }
 
 @media (max-width: 1170px) {
-.right_side {
-  min-width: 185px;
-  max-width: 185px;
-}
-}
-
-@media (max-width: 1060px) {
   .right_side {
-    /* min-width: auto; */
+    min-width: 182px;
+    max-width: 182px;
   }
 }
 

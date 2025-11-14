@@ -56,9 +56,9 @@
 
 .user_menu_list_theme_switcher {
   display: none;
-  position: absolute;
-  right: 15px;
-  top: 115px;
+  position: absolute; 
+  top: 154px !important;
+  right: 8px !important;
 }
 
 .add_post svg {
@@ -132,6 +132,7 @@
   text-align: center;
   content: attr(alt);
 }
+
 /* /hide alt */
 
 .no_avatar_icon svg {
@@ -146,8 +147,8 @@
 .user_online_status_circle_icon_avatar {
   position: absolute;
   z-index: 1;
-  top: 23px;
-  left: 25px;
+  top: 22.7px;
+  left: 24.5px;
 }
 
 .user_online_status_circle_icon_avatar svg {
@@ -400,10 +401,8 @@
 
   .user_menu_list_theme_switcher {
     display: block;
-    top: 145px !important;
-    right: 8px !important;
   }
- 
+
 }
 
 @media (max-width: 1005px) {
