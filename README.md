@@ -33,7 +33,7 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 <p align="center">
 <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/gif_1.gif"/>
 </p>
-<p align="center">|GIF 1| Demonstration of the search engine.</p>
+<p align="center">Demonstration of the search engine.</p>
 <br>
 
 5. UX/UI design has been improved for larger tablet screens (iPad Pro and similar devices). The side navigation bar has become more compact, increasing the display area of ​the main content:
