@@ -743,7 +743,7 @@ export const searchPosts = async (req, res) => {
             nextCursor = result[result.length - 1].createdAt.toISOString();
         }
 
-        // 6. Answer: We return only posts and nextCursor
+        // 6. res: return only posts and nextCursor
         return res.status(200).json({
             posts: result,
             nextCursor
