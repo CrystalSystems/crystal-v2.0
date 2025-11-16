@@ -84,6 +84,7 @@
   z-index: 1;
   top: 32px;
   left: 34px;
+  pointer-events: none;
 }
 
 .user_online_status_circle_icon_avatar svg {
