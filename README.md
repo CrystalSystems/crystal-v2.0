@@ -8,7 +8,7 @@
 SPA, REST API, FSD.
 
 **Composition:** <br/>
-[Full code](https://github.com/CrystalSystems/crystal-v2.0/) | Package.json: [frontend](https://github.com/CrystalSystems/crystal-v2.0/blob/main/frontend/package.json) | [backend](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/package.json)<br/>
+[Full code](https://github.com/CrystalSystems/crystal-v2.0/main/) | Package.json: [frontend](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/frontend/package.json) | [backend](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/package.json)<br/>
 
 **Structure:** <br/>
 MongoDB v8.0.4.<br/>
@@ -24,11 +24,11 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 
 1. Mongoose has been removed and replaced by [native driver](https://www.npmjs.com/package/mongodb) MongoDB.
 
-2. Data schemas for all collections (<code>[users](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/user/user.schema.js)</code>, <code>[posts](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/post/post.schema.js)</code>, <code>[likes](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/like/like.schema.js)</code>, <code>[hashtags](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/hashtag/hashtag.schema.js)</code>), defined using the standard JSON Schema and [initialized](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/core/engine/db/initializeCollections.js) in MongoDB using the <code>[$jsonSchema](https://www.mongodb.com/docs/manual/reference/operator/query/jsonSchema/#mongodb-query-op.-jsonSchema)</code>. This approach provides consistency and a common structure for documents in collections.
+2. Data schemas for all collections (<code>[users](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/modules/user/user.schema.js)</code>, <code>[posts](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/modules/post/post.schema.js)</code>, <code>[likes](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/modules/like/like.schema.js)</code>, <code>[hashtags](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/modules/hashtag/hashtag.schema.js)</code>), defined using the standard JSON Schema and [initialized](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/core/engine/db/initializeCollections.js) in MongoDB using the <code>[$jsonSchema](https://www.mongodb.com/docs/manual/reference/operator/query/jsonSchema/#mongodb-query-op.-jsonSchema)</code>. This approach provides consistency and a common structure for documents in collections.
 
-3. For <code>[hashtags](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/hashtag/hashtag.schema.js)</code> and <code>[likes](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/modules/like/like.schema.js)</code> separate collections were created with denormalization and indexing, which will provide higher performance with a large amount of data.
+3. For <code>[hashtags](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/modules/hashtag/hashtag.schema.js)</code> and <code>[likes](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/modules/like/like.schema.js)</code> separate collections were created with denormalization and indexing, which will provide higher performance with a large amount of data.
 
-4. To search through post content, MongoDB Full-Text Search is used based on the <code>[$text](https://www.mongodb.com/docs/manual/reference/operator/query/text/)</code> operator. **Frontend ([SearchPage.jsx](https://github.com/CrystalSystems/crystal-v2.0/blob/main/frontend/src/pages/SearchPage/SearchPage.jsx), [Search.jsx](https://github.com/CrystalSystems/crystal-v2.0/blob/main/frontend/src/shared/ui/Search/Search.jsx))** | **Backend ([searchPosts](https://github.com/CrystalSystems/crystal-v2.0/blob/98498943156ac63dd3f00c2012ff45712aecfc99/backend/src/modules/post/post.controller.js#L689))**:
+4. To search through post content, MongoDB Full-Text Search is used based on the <code>[$text](https://www.mongodb.com/docs/manual/reference/operator/query/text/)</code> operator. **Frontend ([SearchPage.jsx](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/frontend/src/pages/SearchPage/SearchPage.jsx), [Search.jsx](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/frontend/src/shared/ui/Search/Search.jsx))** | **Backend ([searchPosts](https://github.com/CrystalSystems/crystal-v2.0/blob/98498943156ac63dd3f00c2012ff45712aecfc99/backend/src/modules/post/post.controller.js#L689))**:
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/gif_1.gif"/>
@@ -49,11 +49,11 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 <p align="center">|Screenshot 2| Improved UX/UI design, dark theme.</p>
 
 
-6. Added user status (online/offline). The logic is implemented using WebSocket ([frontend](https://github.com/CrystalSystems/crystal-v2.0/blob/main/frontend/src/shared/hooks/useWebSocket/useWebSocket.js) | [backend]([</a>](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/core/engine/web/websocket.js))). Added display of the time of the last visit to the site.
+6. Added user status (online/offline). The logic is implemented using WebSocket ([frontend](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/frontend/src/shared/hooks/useWebSocket/useWebSocket.js) | [backend]([</a>](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/core/engine/web/websocket.js))). Added display of the time of the last visit to the site.
 
 7. The user status (when offline) now displays the time of their last visit to the site.
 
-8. [Multer](https://www.npmjs.com/package/multer) has been replaced by [Sharp](https://www.npmjs.com/package/sharp). The following image upload management and cybersecurity features have been added to [sharp-upload.js](https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/shared/):
+8. [Multer](https://www.npmjs.com/package/multer) has been replaced by [Sharp](https://www.npmjs.com/package/sharp). The following image upload management and cybersecurity features have been added to [sharp-upload.js](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/shared/):
 
 **— Limiting simultaneous image processing ([Semaphore](https://github.com/CrystalSystems/crystal-v2.0/blob/ca54aec0bc7a5ef96b9172d005aca608829bd05e/backend/src/shared/utils/sharp/sharp-upload.js#L38))**<br>
 To prevent processor overload during resource-intensive image processing, a semaphore mechanism is used.
@@ -87,16 +87,16 @@ After passing the initial checks (Semaphore and Rate Limiting), the uploaded fil
 15. Added a 'Back' button.
 16. Added logic for deleting old images from posts and users: after deleting/replacing images, after deleting a user or post.
 
-17. Added <a href="https://github.com/CrystalSystems/crystal-v2.0/blob/main/backend/src/shared/helpers/extract-hashtags-from-text/extract-hashtags-from-text.js" target="_blank" rel="noopener" >validation</a> for hashtags in the backend, which prevents saving hashtags like: <code class="inline-code">##Test</code>, <code class="inline-code">#Te#st</code>, <code class="inline-code">#Te?st</code>, etc. The check is performed using a regular expression — <code class="inline-code">/^[\p{L}0-9_-]+$/u</code> (allows any Unicode letters, numbers, hyphens, and underscores). You can also set the allowed number of hashtags in one post and the hashtag length using constants: <code class="inline-code">MAX_HASHTAGS_COUNT</code> and <code class="inline-code">MAX_HASHTAG_LENGTH</code>. If a hashtag fails validation, it is not added to the database, but the post is still created and its text will contain an invalid hashtag — <code class="inline-code">#Te#st</code>. After successful verification, the hashtag <code class="inline-code">#Test</code> is added to the <code class="inline-code">name</code> field of the <code class="inline-code">hashtags</code> collection, in lowercase — <code class="inline-code">test</code>.
+17. Added <a href="https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/shared/helpers/extract-hashtags-from-text/extract-hashtags-from-text.js" target="_blank" rel="noopener" >validation</a> for hashtags in the backend, which prevents saving hashtags like: <code class="inline-code">##Test</code>, <code class="inline-code">#Te#st</code>, <code class="inline-code">#Te?st</code>, etc. The check is performed using a regular expression — <code class="inline-code">/^[\p{L}0-9_-]+$/u</code> (allows any Unicode letters, numbers, hyphens, and underscores). You can also set the allowed number of hashtags in one post and the hashtag length using constants: <code class="inline-code">MAX_HASHTAGS_COUNT</code> and <code class="inline-code">MAX_HASHTAG_LENGTH</code>. If a hashtag fails validation, it is not added to the database, but the post is still created and its text will contain an invalid hashtag — <code class="inline-code">#Te#st</code>. After successful verification, the hashtag <code class="inline-code">#Test</code> is added to the <code class="inline-code">name</code> field of the <code class="inline-code">hashtags</code> collection, in lowercase — <code class="inline-code">test</code>.
 
-18. Added <a href="https://github.com/CrystalSystems/crystal-v2.0/blob/main/frontend/src/shared/helpers/formatting/formatLinksInText.jsx" target="_blank" rel="noopener" >validation</a> for hashtags in the frontend. To be displayed as a clickable link, the hashtag must be validated using a regular expression — <code class="inline-code">/^[\p{L}0-9_-]+$/u</code> (Allows any Unicode letters, numbers, hyphens, and underscores).
+18. Added <a href="https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/frontend/src/shared/helpers/formatting/formatLinksInText.jsx" target="_blank" rel="noopener" >validation</a> for hashtags in the frontend. To be displayed as a clickable link, the hashtag must be validated using a regular expression — <code class="inline-code">/^[\p{L}0-9_-]+$/u</code> (Allows any Unicode letters, numbers, hyphens, and underscores).
 
 19. Added more informative display of post creation and update dates in the
-<a href="https://github.com/CrystalSystems/crystal-v2.0/blob/main/frontend/src/pages/FullPostPage/FullPostPage.jsx" target="_blank" rel="noopener">full</a>
+<a href="https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/frontend/src/pages/FullPostPage/FullPostPage.jsx" target="_blank" rel="noopener">full</a>
 and
-<a href="https://github.com/CrystalSystems/crystal-v2.0/blob/main/frontend/src/widgets/PostPreview/PostPreview.jsx" target="_blank" rel="noopener">preview</a>
+<a href="https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/frontend/src/widgets/PostPreview/PostPreview.jsx" target="_blank" rel="noopener">preview</a>
 versions. Date formatting occurs in a special hook —
-<a href="https://github.com/CrystalSystems/crystal-v2.0/blob/main/frontend/src/shared/hooks/formatting/useFormattedPostDate/useFormattedPostDate.jsx" target="_blank" rel="noopener">useFormattedPostDate</a>,
+<a href="https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/frontend/src/shared/hooks/formatting/useFormattedPostDate/useFormattedPostDate.jsx" target="_blank" rel="noopener">useFormattedPostDate</a>,
 which performs localized date and time formatting in two languages ​​(Russian and English) using
 <code class="inline-code">toLocaleDateString</code> and <code class="inline-code">toLocaleTimeString</code>.
 For the English locale, a 12-hour clock is used (<code class="inline-code">Jul 4, 2025 ∙ 10:45 PM</code>),
