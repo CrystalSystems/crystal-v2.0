@@ -8,7 +8,7 @@
 SPA, REST API, FSD.
 
 **Composition:** <br/>
-[Full code](https://github.com/CrystalSystems/crystal-v2.0/main/) | Package.json: [frontend](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/frontend/package.json) | [backend](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/package.json)<br/>
+[Full code](https://github.com/CrystalSystems/crystal-v2.0) | Package.json: [frontend](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/frontend/package.json) | [backend](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/package.json)<br/>
 
 **Structure:** <br/>
 MongoDB v8.0.4.<br/>
