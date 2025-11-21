@@ -7,6 +7,6 @@
 
 3. Создать админа в базе данных, и прописать значения в соответствующих **.env переменных**, для выполнения безопасного подключения к бд, через `mongodb://${USER}:${PASSWORD}@${HOST}:${PORT}/?authSource=${AUTH_SOURCE}`.
 
-4. Добавить в конфигурацию Nginx правило <code>location /ws</code> для поддержки WebSocket, следуя [данному примеру](https://github.com/CrystalSystems/crystal-v2.0/blob/1fa7e349aef941259801ebacdcfd15d21bc25a7c/docs/examples/nginx/sites-available/crystal#L38).
+4. Добавить в конфигурацию Nginx правило <code>location /ws</code> для поддержки WebSocket, следуя [данному примеру](https://github.com/CrystalSystems/crystal-v2.0/blob/fbe94fa25ab8765f036dbc8311a67b9aaac47608/docs/examples/nginx/sites-available/crystal#L38).
 
 

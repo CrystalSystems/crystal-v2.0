@@ -7,4 +7,4 @@ Uploading project files to a VM in a VPC can be done not through GitHub, but thr
 
 3. Create an admin in the database, and set the values ​​in the corresponding **.env variables** to make a secure connection to the database via `mongodb://${USER}:${PASSWORD}@${HOST}:${PORT}/?authSource=${AUTH_SOURCE}`.
 
-4. Add the <code>location /ws</code> rule to the Nginx configuration to support WebSocket, following [this example](https://github.com/CrystalSystems/crystal-v2.0/blob/1fa7e349aef941259801ebacdcfd15d21bc25a7c/docs/examples/nginx/sites-available/crystal#L38).
+4. Add the <code>location /ws</code> rule to the Nginx configuration to support WebSocket, following [this example](https://github.com/CrystalSystems/crystal-v2.0/blob/fbe94fa25ab8765f036dbc8311a67b9aaac47608/docs/examples/nginx/sites-available/crystal#L38).
