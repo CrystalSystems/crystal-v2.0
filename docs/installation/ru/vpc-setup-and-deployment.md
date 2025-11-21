@@ -1,4 +1,4 @@
-# VPC Setup and Deployment
+# Настройка и развертывание на VPC
 
 1. Создать **.env переменные**, следуя соответствующим примерам для [frontend](https://github.com/CrystalSystems/crystal-v2.0/tree/main/docs/examples/env/frontend/env) и [backend](https://github.com/CrystalSystems/crystal-v2.0/tree/main/docs/examples/env/backend/env).
 

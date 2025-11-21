@@ -1,4 +1,4 @@
-# VPC Setup and Deployment
+# Setup and Deployment on VPC
 
 1. Create **.env variables** following the corresponding examples for [frontend](https://github.com/CrystalSystems/crystal-v2.0/tree/main/docs/examples/env/frontend/env) and [backend](https://github.com/CrystalSystems/crystal-v2.0/tree/main/docs/examples/env/backend/env).
 
