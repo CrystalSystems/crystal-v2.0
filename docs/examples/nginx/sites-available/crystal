@@ -78,4 +78,4 @@ server {
 	server_name example.com www.example.com;
     return 404; # managed by Certbot
 
-}
+} 
