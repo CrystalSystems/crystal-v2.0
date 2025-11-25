@@ -82,7 +82,7 @@
 .user_online_status_circle_icon_avatar {
   position: absolute;
   z-index: 1;
-  top: 32px;
+  top: 31px;
   left: 34px;
   pointer-events: none;
 }

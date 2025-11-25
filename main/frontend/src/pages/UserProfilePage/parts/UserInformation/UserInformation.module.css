@@ -300,8 +300,8 @@
 
 .no_avatar_icon svg {
   fill: var(--no_avatar_icon_fill);
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
 }
 
 .avatar_save_loader {
@@ -323,8 +323,8 @@
   fill: var(--no_avatar_icon_fill);
   stroke: var(--no_avatar_icon_fill);
   stroke-width: 1.3px;
-  width: 123px;
-  height: 123px;
+  width: 153px;
+  height: 153px;
 }
 
 .word_gif_icon svg {
@@ -516,7 +516,7 @@
 .user_online_status_circle_icon {
   position: absolute;
   right: 19px;
-  top: 124.5px;
+  top: 124px;
   z-index: 1;
 }
 
