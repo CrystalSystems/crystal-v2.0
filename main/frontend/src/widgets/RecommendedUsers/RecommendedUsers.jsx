@@ -5,7 +5,7 @@ import {
   useSelector
 } from 'react-redux';
 import { useQuery } from '@tanstack/react-query';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { httpClient } from '../../shared/api';
@@ -43,11 +43,13 @@ export function RecommendedUsers() {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
+  const location = useLocation();
+
   const users = useQuery({
     queryKey: [
       'users',
       'recommendedUsers',
-      authorizedUser?.customId || 'guest'
+      location.pathname
     ],
 
     queryFn: () => {

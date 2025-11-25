@@ -57,7 +57,7 @@
 .user_menu_list_theme_switcher {
   display: none;
   position: absolute; 
-  top: 154px !important;
+  top: 147px !important;
   right: 8px !important;
 }
 
@@ -88,8 +88,8 @@
 .search_icon svg {
   position: relative;
   bottom: 1px;
-  width: 30px;
-  height: 30px;
+  width: 22px;
+  height: 22px;
   stroke: var(--stroke_global);
 }
 
@@ -423,7 +423,7 @@
     border-bottom-left-radius: 5px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
-    top: 44px;
+    top: 45px;
     left: auto;
     right: 15px;
   }

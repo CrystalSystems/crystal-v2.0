@@ -225,7 +225,7 @@ export const updateUserSettings = async (req, res) => {
 
     // Generating updates
     const updates = {
-      updatedAt: new Date(), // Гарантируем изменение
+      updatedAt: new Date(),
     };
     if (typeof hideGif === 'boolean') {
       updates['settings.interface.hideGif'] = hideGif;
@@ -234,8 +234,8 @@ export const updateUserSettings = async (req, res) => {
       updates['settings.privacy.hideGender'] = hideGender;
     }
 
-    // 1. Атомарное обновление с использованием updateOne (не возвращает документ, но быстрее)
-    // 💡 Мы используем updateOne, который гарантированно обновляет и возвращает count
+    // 1. Atomic update using updateOne (doesn't return the document, but is faster)
+    // Using updateOne, which is guaranteed to update and return a count
     const result = await users().updateOne(
       { customId: userId },
       { $set: updates },
@@ -244,13 +244,13 @@ export const updateUserSettings = async (req, res) => {
       }
     );
 
-    // Проверка, что пользователь был найден и изменен
+    // Verifying that the user was found and modified
     if (result.matchedCount === 0) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // 2. УСПЕХ: Возвращаем сообщение об успехе, как было в Mongoose
-    // 💡 Теперь мы точно знаем, что база обновилась, и фронтенд может обновить себя сам
+    // 2. SUCCESS: Return a success message, just like in Mongoose
+    // Now we know for sure that the database has been updated, and the frontend can update itself
     res.status(200).json({ message: "Settings updated", hideGif, hideGender });
 
   } catch (error) {

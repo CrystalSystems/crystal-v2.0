@@ -1,15 +1,32 @@
 // frontend/src/shared/hooks/useWebSocket.js
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAuthData } from '../../../features';
 import { WS_URL } from '../../../shared/constants';
 
+const generateTabId = () => {
+  return (Date.now() + Math.random())
+    .toString(36)
+    .replace('.', '')
+    .substring(2);
+};
+
 export function useWebSocket() {
   const queryClient = useQueryClient();
   const { authorizedUser, isSuccess: isAuthSuccess } = useAuthData();
+  
   const wsRef = useRef(null);
-  const tabId = useRef(crypto.randomUUID());
+  const tabIdRef = useRef(generateTabId());
+  
+  // Trigger for hard reset of connection
+  const [reconnectCount, setReconnectCount] = useState(0);
+  
+  const hiddenTimeoutRef = useRef(null);
+  
+  // A flag to let you know if we've gone into "long sleep"
+  const wasHiddenRef = useRef(false);
+
   const [wsState, setWsState] = useState({
     isConnected: false,
     isPending: false,
@@ -17,182 +34,179 @@ export function useWebSocket() {
     isSuccess: false,
   });
 
-  useEffect(() => {
-    // console.log('useWebSocket: Effect worked', { isAuthSuccess, authorizedUser });
+  const closeSocket = useCallback((socket, code, reason) => {
+    if (socket) {
+      socket.onclose = null;
+      socket.onmessage = null;
+      socket.onerror = null;
+      socket.onopen = null;
+      if (socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CONNECTING) {
+        socket.close(code, reason);
+      }
+    }
+  }, []);
 
-    // When !isAuthSuccess closes the WebSocket immediately
-    if (!isAuthSuccess) {
-      // console.log('useWebSocket: isAuthSuccess false, close WebSocket');
-      if (wsRef.current?.readyState === WebSocket.OPEN) {
-        // console.log('useWebSocket: Send logout message and close');
-        wsRef.current.send(
-          JSON.stringify({
+  useEffect(() => {
+    if (!isAuthSuccess || !authorizedUser?._id) {
+      if (wsRef.current) {
+        if (wsRef.current.readyState === WebSocket.OPEN) {
+          wsRef.current.send(JSON.stringify({
             type: 'logout',
             userId: authorizedUser?._id || 'unknown',
-            tabId: tabId.current,
-          })
-        );
-        wsRef.current.close(1000, 'User has logged out');
-      }
-      if (wsRef.current?.activityInterval) {
-        // console.log('useWebSocket: Clearing activity interval');
-        clearInterval(wsRef.current.activityInterval);
-      }
-      setWsState({
-        isConnected: false,
-        isPending: false,
-        isError: false,
-        isSuccess: false,
-      });
-      wsRef.current = null;
-      return;
-    }
-
-    if (!authorizedUser?._id) {
-      // console.log('useWebSocket: No _id of the authorized user, skip WebSocket');
-      setWsState({
-        isConnected: false,
-        isPending: false,
-        isError: false,
-        isSuccess: false,
-      });
-      return;
-    }
-
-    const userId = authorizedUser._id;
-    // console.log(`useWebSocket: Connect for userId ${userId}, tabId ${tabId.current} to ${WS_URL}`);
-    setWsState((prev) => ({ ...prev, isPending: true, isError: false, isSuccess: false }));
-
-    wsRef.current = new WebSocket(WS_URL);
-
-    wsRef.current.onopen = () => {
-      // console.log('useWebSocket: WebSocket connected');
-      setWsState({ isConnected: true, isPending: false, isError: false, isSuccess: true });
-      wsRef.current.send(
-        JSON.stringify({
-          type: 'visibility',
-          status: document.visibilityState,
-          userId,
-          tabId: tabId.current,
-        })
-      );
-
-      const activityInterval = setInterval(() => {
-        if (wsRef.current.readyState === WebSocket.OPEN && isAuthSuccess) {
-          // console.log(`useWebSocket: Send activity for userId ${userId}, tabId ${tabId.current}`);
-          wsRef.current.send(JSON.stringify({ type: 'activity', userId, tabId: tabId.current }));
-          // console.log('useWebSocket: Sending a ping to the server');
-          wsRef.current.send('ping');
-        } else if (!isAuthSuccess) {
-          // console.log('useWebSocket: Stop activity, user is not authorized');
-          clearInterval(wsRef.current.activityInterval);
-          wsRef.current.close(1000, 'User has logged out');
+            tabId: tabIdRef.current,
+          }));
         }
-      }, 30000); // speed adjustment isOnline: false, when leaving or minimizing a tab
-      wsRef.current.activityInterval = activityInterval;
+        closeSocket(wsRef.current, 1000, 'User logged out');
+        wsRef.current = null;
+      }
+      return;
+    }
+
+    // We generate a new ID for each new connection.
+    tabIdRef.current = generateTabId();
+    const currentTabId = tabIdRef.current;
+    const userId = authorizedUser._id;
+
+    setWsState(prev => ({ ...prev, isPending: true, isError: false }));
+
+    const ws = new WebSocket(WS_URL);
+    wsRef.current = ws;
+
+    ws.onopen = () => {
+      setWsState({ isConnected: true, isPending: false, isError: false, isSuccess: true });
+      wasHiddenRef.current = false; // Reset the "was hidden" flag
+      
+      if (ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({
+          type: 'visibility',
+          status: 'visible', // Always visible on startup
+          userId,
+          tabId: currentTabId,
+        }));
+        ws.send(JSON.stringify({ type: 'activity', userId, tabId: currentTabId }));
+      }
+
+      ws.activityInterval = setInterval(() => {
+        if (ws.readyState === WebSocket.OPEN) {
+          ws.send(JSON.stringify({ type: 'activity', userId, tabId: currentTabId }));
+          ws.send('ping');
+        }
+      }, 30000); 
     };
 
-    wsRef.current.onmessage = (event) => {
+    ws.onmessage = (event) => {
       try {
-        if (event.data === 'pong') {
-          // console.log('useWebSocket: Received pong from server');
-          return;
-        }
+        if (event.data === 'pong') return;
         const data = JSON.parse(event.data);
-        // console.log('useWebSocket: Message received:', data);
+        
+        //  Change of status 'online', in real time (Optimistic update on socket event) 
         if (data.type === 'user:online' || data.type === 'user:offline') {
-          // console.log('useWebSocket: Resetting cache ["users"] for user:online/offline', { userId: data.userId });
+          const isOnlineNow = data.type === 'user:online';
+          
+          // 1. Instantly refresh the cache for THIS specific user
+          // It doesn't matter whether we look at this user's profile or the list where he is.
+          queryClient.setQueriesData({ queryKey: ['users'] }, (oldData) => {
+             if (!oldData || !oldData.data) return oldData;
+             
+             // If the ID in the cache matches the ID from the socket event
+             if (oldData.data._id === data.userId) {
+               return {
+                 ...oldData,
+                 data: {
+                   ...oldData.data,
+                   status: {
+                     ...oldData.data.status,
+                     isOnline: isOnlineNow, // Set status instantly
+                     // If you're logged in, update lastSeen to "now"
+                     lastSeen: isOnlineNow ? new Date().toISOString() : oldData.data.status.lastSeen
+                   }
+                 }
+               };
+             }
+             return oldData;
+          });
+
+          // 2. And only then do we start the background update (for reliability)
           queryClient.invalidateQueries({ queryKey: ['users'] });
         }
       } catch (error) {
-        console.error('useWebSocket: Error parsing message:', error);
-        setWsState((prev) => ({ ...prev, isError: true }));
+        console.error('[WS] Parse error:', error);
       }
     };
 
-    wsRef.current.onclose = (event) => {
-      // console.log('useWebSocket: WebSocket disabled', { code: event.code, reason: event.reason });
-      setWsState({ isConnected: false, isPending: false, isError: true, isSuccess: false });
-      if (wsRef.current?.activityInterval) {
-        // console.log('useWebSocket: Clearing activity interval');
-        clearInterval(wsRef.current.activityInterval);
+    ws.onclose = (event) => {
+      setWsState(prev => ({ ...prev, isConnected: false, isSuccess: false }));
+      if (ws.activityInterval) clearInterval(ws.activityInterval);
+
+      // Auto-reconnect if the connection is lost
+      if (ws === wsRef.current && isAuthSuccess) {
+        setTimeout(() => {
+             setReconnectCount(prev => prev + 1); 
+        }, 1000);
       }
-      setTimeout(() => {
-        if (!isAuthSuccess) {
-          // console.log('useWebSocket: Skip reconnection attempt: user is not authorized');
-          return;
-        }
-        if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) {
-          // console.log('useWebSocket: Trying to reconnect');
-          queryClient.invalidateQueries({ queryKey: ['users'] });
-          wsRef.current = new WebSocket(WS_URL);
-          setWsState((prev) => ({ ...prev, isPending: true }));
-        }
-      }, 1000);
     };
 
-    wsRef.current.onerror = (error) => {
-      console.error('useWebSocket: WebSocket Error:', error);
-      setWsState({ isConnected: false, isPending: false, isError: true, isSuccess: false });
-      // console.log('useWebSocket: Reset cache ["users"] on error');
-      queryClient.invalidateQueries({ queryKey: ['users'] });
-      if (wsRef.current) {
-        wsRef.current.close();
-      }
+    ws.onerror = (error) => {
+      console.error('[WS] Error:', error);
+      setWsState(prev => ({ ...prev, isError: true }));
+      ws.close(); 
     };
 
     const handleVisibilityChange = () => {
-      if (wsRef.current?.readyState === WebSocket.OPEN && isAuthSuccess) {
-        const status = document.visibilityState;
-        // console.log(`useWebSocket: Visibility changed to ${status} for userId ${userId}, tabId ${tabId.current}`);
-        wsRef.current.send(
-          JSON.stringify({ type: 'visibility', status, userId, tabId: tabId.current })
-        );
+      if (document.visibilityState === 'visible') {
+        // 🟢 WE'RE BACK!
+
+        // We immediately update the data from the server
+        queryClient.invalidateQueries({ queryKey: ['users'] });
+
+        // Optimistic Renewal of Ourselves (So that the light bulb immediately turns on in us)
+        queryClient.setQueriesData({ queryKey: ['users'] }, (oldData) => {
+           if (!oldData || !oldData.data) return oldData;
+           if (oldData.data._id === userId) {
+             return { ...oldData, data: { ...oldData.data, status: { ...oldData.data.status, isOnline: true } } };
+           }
+           return oldData;
+        });
+
+        if (hiddenTimeoutRef.current) {
+          clearTimeout(hiddenTimeoutRef.current);
+          hiddenTimeoutRef.current = null;
+          wasHiddenRef.current = false;
+          return; 
+        }
+
+        // Hard Reconnect After a Long Sleep
+        if (wasHiddenRef.current || !ws || ws.readyState !== WebSocket.OPEN) {
+           setReconnectCount(c => c + 1);
+        } else {
+           ws.send(JSON.stringify({ type: 'visibility', status: 'visible', userId, tabId: currentTabId }));
+           ws.send(JSON.stringify({ type: 'activity', userId, tabId: currentTabId }));
+        }
+
+      } else {
+         // 🔴 WE'RE LEAVING
+         if (hiddenTimeoutRef.current) clearTimeout(hiddenTimeoutRef.current);
+         
+         hiddenTimeoutRef.current = setTimeout(() => {
+             wasHiddenRef.current = true; // Let's remember that we have "officially" gone into invisibility.
+             if (ws.readyState === WebSocket.OPEN) {
+                 ws.send(JSON.stringify({ type: 'visibility', status: 'hidden', userId, tabId: currentTabId }));
+             }
+             hiddenTimeoutRef.current = null;
+         }, 4000); // exit (hidden) in 4 seconds
       }
     };
-
-    // Periodic isAuthSuccess check for other tabs
-    const authCheckInterval = setInterval(() => {
-      if (!isAuthSuccess && wsRef.current?.readyState === WebSocket.OPEN) {
-        // console.log('useWebSocket: User is not authorized, close WebSocket');
-        wsRef.current.send(
-          JSON.stringify({
-            type: 'logout',
-            userId: authorizedUser?._id || 'unknown',
-            tabId: tabId.current,
-          })
-        );
-        wsRef.current.close(1000, 'User has logged out');
-      }
-    }, 5000); // Check every 5 seconds
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
     return () => {
-      // console.log('useWebSocket: Clear WebSocket', { isAuthSuccess });
-      if (wsRef.current) {
-        if (wsRef.current.readyState === WebSocket.OPEN) {
-          // console.log('useWebSocket: Send logout message and close on cleanup');
-          wsRef.current.send(
-            JSON.stringify({
-              type: 'logout',
-              userId: authorizedUser?._id || 'unknown',
-              tabId: tabId.current,
-            })
-          );
-          wsRef.current.close(1000, 'User logged out or clearing');
-        }
-        if (wsRef.current.activityInterval) {
-          // console.log('useWebSocket: Clear activity interval when clearing');
-          clearInterval(wsRef.current.activityInterval);
-        }
-        wsRef.current = null;
-      }
-      clearInterval(authCheckInterval); // Clearing the check interval
       document.removeEventListener('visibilitychange', handleVisibilityChange);
-      setWsState({ isConnected: false, isPending: false, isError: false, isSuccess: false });
+      if (ws.activityInterval) clearInterval(ws.activityInterval);
+      if (hiddenTimeoutRef.current) clearTimeout(hiddenTimeoutRef.current);
+      closeSocket(ws, 1000, 'Cleanup/Reconnecting');
     };
-  }, [queryClient, isAuthSuccess, authorizedUser?._id]);
+
+  }, [isAuthSuccess, authorizedUser?._id, queryClient, reconnectCount, closeSocket]);
 
   return {
     isConnected: wsState.isConnected,

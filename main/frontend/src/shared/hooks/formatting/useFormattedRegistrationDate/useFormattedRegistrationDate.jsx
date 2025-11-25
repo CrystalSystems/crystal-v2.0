@@ -58,7 +58,7 @@ export const useFormattedRegistrationDate = (dateString) => {
   return {
     isCurrentYear,
     element: (
-      <div className={styles.formatted_post_date_wrap}>
+      <div className={styles.formatted_registration_date_wrap}>
         <p>{datePart}</p>
         <div className={styles.separator}><DotIcon /></div>
         <p>{timePart}</p>

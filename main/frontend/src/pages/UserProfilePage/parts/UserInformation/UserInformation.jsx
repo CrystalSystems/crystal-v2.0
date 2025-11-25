@@ -21,7 +21,6 @@ import { useTranslation } from 'react-i18next';
 import { httpClient } from '../../../../shared/api';
 import { API_BASE_URL } from '../../../../shared/constants';
 import { useAuthData } from '../../../../features';
-import { useWebSocket } from '../../../../shared/hooks/useWebSocket';
 import {
   setShowMoreAboutUserModal,
   setUserId
@@ -57,9 +56,6 @@ export function UserInformation() {
     isPending: isAuthPending,
     isSuccess: isAuthSuccess
   } = useAuthData();
-
-  const logIn = window.localStorage.getItem('logIn');
-
 
   const logInStatus = useSelector(
     (state) => state.logInStatus
@@ -131,7 +127,6 @@ export function UserInformation() {
     retry: false,
     queryFn: () => httpClient.get(`/users/${userId}`).then((response) => response),
   });
-
 
   // banner useState
   const [
@@ -444,6 +439,16 @@ export function UserInformation() {
 
   // /formatted last seen
 
+  // Logic to hide "Last seen" for very short durations
+  // Determine the lines that need to be hidden (0-2 seconds, in Russian and English)
+  const shortLastSeenExclusions = ['0 с', '1 с', '2 с', '0 s', '1 s', '2 s'];
+
+  // Checking whether it is necessary to hide the short “was online”
+  const shouldHideLastSeenShort = shortLastSeenExclusions.includes(formattedLastSeenShort);
+
+  // Combined logic to display the short "was online"
+  const shouldShowLastSeenShort = isVisibleLastSeenShort && user.data?.status.lastSeen && !shouldHideLastSeenShort;
+
   return (
     <>
       {(user.isPending || (logInStatus && isAuthPending)) && (
@@ -641,8 +646,6 @@ export function UserInformation() {
                     </div>
                   )}
 
-
-
                   {(userOnline) ? (
                     <div className={styles.user_online_status_circle_icon}>
                       <UserOnlineStatusCircleIcon />
@@ -650,8 +653,7 @@ export function UserInformation() {
                   ) : (
 
                     //initially - isVisibleLastSeenShort &&
-                    (isVisibleLastSeenShort && user.data?.status.lastSeen) && (
-
+                    (shouldShowLastSeenShort) && (
                       <div className={styles.last_seen_short_icon}
                         onMouseOver={(event) => {
                           event.stopPropagation();
@@ -664,9 +666,6 @@ export function UserInformation() {
                       >
                         <p>{formattedLastSeenShort}</p>
                       </div>
-
-
-
                     )
                   )}
 
@@ -675,65 +674,6 @@ export function UserInformation() {
                       <p>{formattedLastSeen}</p>
                     </div>
                   )}
-
-
-
-                  {/* <div>
-                    {webSocket.isPending ? (
-                      null
-                    ) : (userOnline) ? (
-                      <div className={styles.user_online_status_circle_icon}>
-                        <UserOnlineStatusCircleIcon />
-                      </div>
-                    ) : (
-                      <div className={styles.user_online_status_circle_icon}>
-                        <p>{formattedLastSeen}</p>
-                      </div>
-
-                    )}
-                  </div> */}
-
-
-
-
-                  {/* {isUserOnline ? (
-                    <div className={styles.user_online_status_circle_icon}>
-                      <UserOnlineStatusCircleIcon />
-                    </div>
-                  ) : (
-                    <div className={styles.user_online_status_circle_icon}>
-                      {webSocket.isPending ? (
-                        null // Опционально: показываем лоадер, пока WebSocket подключается
-                      ) : (
-                        <p>{formattedLastSeen}</p>
-                      )}
-                    </div>
-                  )} */}
-
-                  {/*  
-                  {user.data.status.isOnline && (
-                    <div className={styles.user_online_status_circle_icon}>
-                      <UserOnlineStatusCircleIcon />
-                    </div>
-                  )
-                  }
-
-                  {!user.data.status.isOnline && (
-                    <div className={styles.user_online_status_circle_icon}>
-                      <p>{formattedLastSeen}</p>
-                    </div>
-                  )} */}
-
-
-                  {/* {!user.data.status.isOnline && (
-                      <div className={styles.user_online_status_circle_icon}>
-                        <p>{formattedLastSeenShort}</p>
-                      </div>
-                  )} */}
-
-
-
-
                 </div>
                 {saveAvatarMutation.isPending && (
                   <div className={styles.avatar_save_loader}>

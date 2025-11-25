@@ -1,3 +1,4 @@
+// env.mongo.js
 export const BASE_URI = process.env.MONGO_BASE_URI;
 export const HOST = process.env.MONGO_HOST;
 export const PORT = process.env.MONGO_PORT;

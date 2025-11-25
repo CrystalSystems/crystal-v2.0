@@ -13,6 +13,9 @@ import { useTranslation } from "react-i18next";
 import { ThemeSwitcher } from "../../../../features/theme/ThemeSwitcher";
 import { setShowAccessModal } from "../../../../features/accessModal/accessModalSlice";
 import {
+  setShowMobileSearchAndSort
+} from "../../../../features/showMobileSearchAndSort/showMobileSearchAndSortSlice";
+import {
   AuthorizationIcon,
   PlusIcon,
   DotsMenuIcon,
@@ -30,6 +33,10 @@ export function OptionsMenuGuest() {
   const darkThemeStatus = useSelector((state) => state.darkThemeStatus);
 
   const dispatch = useDispatch();
+
+  const { showMobileSearchAndSort } = useSelector(
+    (state) => state.showMobileSearchAndSort
+  );
 
   const [
     showGuestMenuList,
@@ -103,6 +110,12 @@ export function OptionsMenuGuest() {
     });
   }, []);
 
+  const onClickShowMobileSearchAndSort = () => {
+    dispatch(
+      setShowMobileSearchAndSort(!showMobileSearchAndSort)
+    );
+  };
+
   return (
     <div className={styles.options_menu_guest} data-options-menu-guest-dark-theme={darkThemeStatus}>
       <button
@@ -117,6 +130,7 @@ export function OptionsMenuGuest() {
             ? styles.search_icon
             : styles.search_icon + " " + styles.search_icon_hide
         }
+        onClick={() => onClickShowMobileSearchAndSort()}
       >
         <SearchIcon />
       </button>

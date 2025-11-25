@@ -5,7 +5,8 @@ import {
   logInStatusReducer,
   accessModalReducer,
   sideMenuMobileReducer,
-  moreAboutUserModalReducer
+  moreAboutUserModalReducer,
+  showMobileSearchAndSortReducer
 } from "../features";
 
 export const store = configureStore({
@@ -14,6 +15,7 @@ export const store = configureStore({
     logInStatus: logInStatusReducer,
     accessModal: accessModalReducer,
     sideMenuMobile: sideMenuMobileReducer,
-    moreAboutUserModal: moreAboutUserModalReducer
+    moreAboutUserModal: moreAboutUserModalReducer,
+    showMobileSearchAndSort: showMobileSearchAndSortReducer
   },
 });

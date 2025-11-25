@@ -80,6 +80,7 @@ export default function App() {
               <HeaderMobile />
               <SideMenuMobile />
             </div>
+
             <SearchAndSort />
 
             <Routes>

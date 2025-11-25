@@ -200,7 +200,7 @@ export async function initWebSocket(server) {
   // decrementconnections function (exclusively for broken/closed/timeout)
   async function decrementConnections(userId, tabId, removeTab = false, isLogout = false, onComplete = () => { }) {
     const userIdObject = toObjectId(userId);
-    console.log(`[DECREMENT] 1. Старт для userId ${userId}, tabId ${tabId}, removeTab: ${removeTab}, isLogout: ${isLogout}`);
+    console.log(`[DECREMENT] 1. Start for userId ${userId}, tabId ${tabId}, removeTab: ${removeTab}, isLogout: ${isLogout}`);
 
     try {
       if (isLogout) {

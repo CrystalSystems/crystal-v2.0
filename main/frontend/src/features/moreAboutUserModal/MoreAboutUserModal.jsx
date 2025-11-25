@@ -88,10 +88,6 @@ export function MoreAboutUserModal() {
 
   const genderNotSpecified = user?.data?.profile?.gender?.type == 'unspecified';
 
-  console.log(genderIsHidden)
-
-  console.log(genderNotSpecified)
-
   // format registration date
   const registration = useFormattedRegistrationDate(
     user?.data?.createdAt

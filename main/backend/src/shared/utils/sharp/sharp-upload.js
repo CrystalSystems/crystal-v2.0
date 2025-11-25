@@ -120,6 +120,7 @@ export async function processImage(req, res, next) {
       return res.status(400).json({ error: "Multipart/form-data required." });
     }
 
+    // max file size
     const maxFileSize = 2621440; // 2.5 MB
     const busboy = Busboy({ headers: req.headers, limits: { fileSize: maxFileSize } });
     let fileBuffer = null;

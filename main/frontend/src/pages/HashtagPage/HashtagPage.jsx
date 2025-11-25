@@ -95,7 +95,7 @@ export function HashtagPage() {
   );
 
   if (error) {
-    return <div className={styles.error}>Ошибка загрузки постов: {error.message}</div>;
+    return <div className={styles.error}>Error loading posts: {error.message}</div>;
   }
 
 

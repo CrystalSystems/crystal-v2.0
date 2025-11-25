@@ -1,7 +1,7 @@
  .side_menu_mobile_wrap {
    position: fixed;
    animation: fadeIn 300ms forwards;
-   top: 44px;
+   top: 45px;
    right: -1px;
    z-index: 6;
    background-color: var(--filling_background-color_global);

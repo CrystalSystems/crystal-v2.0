@@ -1,13 +1,24 @@
-.header_mobile {
+.header_mobile_wrap {
   background-color: var(--filling_background-color_global);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
   z-index: 10;
   padding: 0 15px;
   top: 0px;
   border-bottom: var(--border_global);
   height: 45px;
+}
+
+.logo_options_menu_wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search_and_sort_wrap {
+  position: absolute;
+  top: 45.5px;
+  right: 0;
+  width: 100%;
 }
 
 .logo {
@@ -43,5 +54,3 @@
     display: none;
   }
 } */
-
- 

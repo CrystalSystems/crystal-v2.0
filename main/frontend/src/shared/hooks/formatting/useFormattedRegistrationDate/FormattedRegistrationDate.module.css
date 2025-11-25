@@ -1,4 +1,4 @@
-.formatted_post_date_wrap {
+.formatted_registration_date_wrap {
     display: flex;
     align-items: center;
 }
@@ -6,8 +6,8 @@
 .separator svg {
     display: flex;
     border-radius: 50%;
-    width: 4px;
-    height: 4px;
+    width: 4.5px;
+    height: 4.5px;
     margin: 0 7px;
     fill: var(--color_global);
 }
@@ -18,5 +18,3 @@
         height: 2.8px;
     }
 }
-
- 

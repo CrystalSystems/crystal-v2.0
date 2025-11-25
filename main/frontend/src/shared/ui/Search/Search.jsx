@@ -8,7 +8,7 @@ import {
   useNavigate,
   useLocation
 } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import {
   SearchIcon,
   DeleteTextInSearchIcon
@@ -17,6 +17,7 @@ import {
 import styles from './Search.module.css';
 
 export function Search() {
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -53,11 +54,20 @@ export function Search() {
   const handleClearSearch = () => {
     setQuery('');
     // When clearing a field, we reset the query parameter in the URL so that SearchPage is also cleared.
-    const currentPath = location.pathname;
+
+    // go to the initial search page when clearing the search bar
+
+    /* const currentPath = location.pathname; */
+
     // If we are on the /search page, we go to /search without parameters
+
+    /*
     if (currentPath.startsWith('/search')) {
       navigate('/search');
     }
+    */
+    // /go to the initial search page when clearing the search bar
+
   };
 
   return (

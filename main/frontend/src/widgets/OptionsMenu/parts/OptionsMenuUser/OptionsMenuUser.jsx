@@ -26,6 +26,9 @@ import {
   setShowSideMenuMobileBackground
 } from "../../../../features/sideMenuMobile/sideMenuMobileSlice";
 import {
+  setShowMobileSearchAndSort
+} from "../../../../features/showMobileSearchAndSort/showMobileSearchAndSortSlice";
+import {
   PlusIcon,
   UserIcon,
   SearchIcon,
@@ -51,7 +54,7 @@ export function OptionsMenuUser() {
   const { authorizedUser, isPending } = useAuthData();
   // /authorized user
 
-const { userOnline } = useUserStatus(authorizedUser?.customId, { delay: 100 });
+  const { userOnline } = useUserStatus(authorizedUser?.customId, { delay: 100 });
 
   // const userOnline = authorizedUser?.status?.isOnline;
 
@@ -62,6 +65,11 @@ const { userOnline } = useUserStatus(authorizedUser?.customId, { delay: 100 });
   const { showSideMenuMobile } = useSelector(
     (state) => state.sideMenuMobile
   );
+
+  const { showMobileSearchAndSort } = useSelector(
+    (state) => state.showMobileSearchAndSort
+  );
+
   const { t, i18n } = useTranslation();
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
@@ -175,6 +183,15 @@ const { userOnline } = useUserStatus(authorizedUser?.customId, { delay: 100 });
       dispatch(setShowSideMenuMobile(true));
       dispatch(setShowSideMenuMobileBackground(true));
     }
+    dispatch(
+      setShowMobileSearchAndSort(false)
+    );
+  };
+
+  const onClickShowMobileSearchAndSort = () => {
+    dispatch(
+      setShowMobileSearchAndSort(!showMobileSearchAndSort)
+    );
   };
 
   if (isPending) {
@@ -197,6 +214,7 @@ const { userOnline } = useUserStatus(authorizedUser?.customId, { delay: 100 });
             ? styles.search_icon
             : styles.search_icon + " " + styles.search_icon_hide
         }
+        onClick={() => onClickShowMobileSearchAndSort()}
       >
         <SearchIcon />
       </button>
