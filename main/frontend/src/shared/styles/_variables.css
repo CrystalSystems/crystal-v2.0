@@ -4,6 +4,7 @@
   --transition_background-color_hover_global: background-color 200ms ease;
   --transition_background-color_active_global: background-color 250ms ease;
   --transition_text-decoration_global: text-decoration 200ms ease;
+  --content_margin_bottom_global: 40px; 
 }
 
 /* dark theme*/

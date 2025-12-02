@@ -1,5 +1,5 @@
 .posts_wrap {
-  margin-bottom: 50px;
+  margin-bottom: var(--content_margin_bottom_global);
 }
 
 .title {

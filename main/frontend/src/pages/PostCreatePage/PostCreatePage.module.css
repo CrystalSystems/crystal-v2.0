@@ -2,7 +2,7 @@
   background-color: var(--filling_background-color_global);
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  margin-bottom: 50px;
+  margin-bottom: var(--content_margin_bottom_global);
   padding: 0 15px 25px 15px;
   border-top: none !important;
   border: var(--border_disappears_in_dark_theme_global);

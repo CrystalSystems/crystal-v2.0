@@ -10,7 +10,7 @@
 
 .side_menu_desktop ul li {
   gap: 15px;
-  padding: 13px 14px;
+  padding: 14px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -22,6 +22,14 @@
   text-wrap: nowrap;
   position: relative;
 }
+
+/* .side_menu_desktop ul li:first-child {
+  padding: 17px 14px 14px 14px;
+}
+
+.side_menu_desktop ul li:last-child {
+  padding: 14px 14px 17px 14px;
+} */
 
 .side_menu_desktop ul li a {
   position: absolute;
@@ -119,7 +127,7 @@
 
 @media (max-width: 1170px) {
 
-.side_menu_desktop svg {
+  .side_menu_desktop svg {
     width: 26px;
     height: 26px;
   }
@@ -152,7 +160,7 @@
 [data-side-menu-desktop-dark-theme="false"] {
   --side_menu_desktop_ul_li_border-radius: 22px;
   --side_menu_desktop_ul_li_padding: 10px;
-  --side_menu_desktop_ul_gap:5px;
+  --side_menu_desktop_ul_gap: 5px;
 }
 
 /* /theme colors */

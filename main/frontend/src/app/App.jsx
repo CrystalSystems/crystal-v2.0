@@ -86,8 +86,9 @@ export default function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
 
-              {/* 💡 NEW: Search route */}
+              {/* search */}
               <Route path="/search" element={<SearchPage />} />
+              {/* /search */}
 
               {/* users */}
               <Route path="/:userId" element={<UserProfilePage />} />

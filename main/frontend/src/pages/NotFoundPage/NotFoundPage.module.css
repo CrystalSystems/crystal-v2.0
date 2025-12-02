@@ -5,7 +5,7 @@
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   background-color: var(--filling_background-color_global);
-  margin-bottom: 50px;
+  margin-bottom: var(--content_margin_bottom_global);
 }
 
 .not_found_page h1 {

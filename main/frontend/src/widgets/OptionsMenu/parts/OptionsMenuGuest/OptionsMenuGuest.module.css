@@ -75,6 +75,7 @@
   opacity: 0;
   background-color: var(--filling_background-color_global);
   box-shadow: rgb(0 0 0 / 18%) 0.2px 0.2px 4px;
+  z-index: 5;
 }
 
 @media (max-width: 1005px) {

@@ -423,7 +423,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 7px;
+  margin-top: 8px;
 }
 
 .post_date_wrap p {
@@ -612,14 +612,16 @@
 }
 
 @media (max-width: 1005px) {
-  .post_wrap {
+  .post_wrap:last-child {
     border-left: none;
     border-right: none;
+    border-radius: 0;
   }
 
-  .post_wrap:last-child {
+  /* .post_wrap:last-child {
     margin-bottom: 60px;
-  }
+  } */
+
 }
 
 @media (max-width: 600px) {

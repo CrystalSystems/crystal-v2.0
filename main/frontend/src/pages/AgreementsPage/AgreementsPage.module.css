@@ -1,6 +1,6 @@
 .agreements {
   padding: 25px 15px 15px 15px;
-  margin-bottom: 50px;
+  margin-bottom: var(--content_margin_bottom_global);
   background-color: var(--filling_background-color_global);
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;

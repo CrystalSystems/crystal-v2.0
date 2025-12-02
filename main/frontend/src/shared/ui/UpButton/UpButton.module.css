@@ -12,6 +12,17 @@
   height: 60px;
 }
 
+@media (max-width: 1005px) {
+  .up_button[data-near-bottom="true"] {
+    bottom: 85px;
+  }
+
+  .up_button[data-near-bottom="true"] svg {
+    position: relative;
+    top: 20px;
+  }
+}
+
 /* variables */
 /* theme colors */
 [data-up-button-dark-theme="true"] {

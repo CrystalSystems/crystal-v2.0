@@ -5,7 +5,7 @@
   border: var(--border_disappears_in_dark_theme_global);
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  margin-bottom: 50px;
+  margin-bottom: var(--content_margin_bottom_global);
   padding: 25px 15px 10px 15px;
 }
 
@@ -307,6 +307,7 @@
 
 .post_actions_bar_wrap {
   margin-top: 15px;
+  margin-bottom: 5px;
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -606,9 +607,12 @@
   }
 
   .post {
-    margin-bottom: 60px;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0;
+    /* margin-bottom: 60px;
     border-left: none;
-    border-right: none;
+    border-right: none; */
   }
 }
 
