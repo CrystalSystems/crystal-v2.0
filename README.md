@@ -22,32 +22,26 @@ Vite v6.1.0.<br/>
 A more convenient [description](https://shedov.top/description-and-capabilities-of-crystal-v2-0/) of this version is on the website [shedov.top](https://shedov.top/).<br/>
 Functionally, this version is almost completely identical to [CRYSTAL v1.0](https://shedov.top/description-and-capabilities-of-crystal-v1-0/), but has a number of key improvements:
 
-1. Mongoose has been removed and replaced by [native driver](https://www.npmjs.com/package/mongodb) MongoDB.
+1. UX/UI design has been improved for larger tablet screens (iPad Pro and similar devices). The side navigation bar has become more compact, increasing the display area of ​the main content:
 
-2. Data schemas for all collections (<code>[users](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/modules/user/user.schema.js)</code>, <code>[posts](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/modules/post/post.schema.js)</code>, <code>[likes](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/modules/like/like.schema.js)</code>, <code>[hashtags](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/modules/hashtag/hashtag.schema.js)</code>), defined using the standard JSON Schema and [initialized](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/core/engine/db/initializeCollections.js) in MongoDB using the <code>[$jsonSchema](https://www.mongodb.com/docs/manual/reference/operator/query/jsonSchema/#mongodb-query-op.-jsonSchema)</code>. This approach provides consistency and a common structure for documents in collections.
+<p align="center">
+<img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/gif_2.gif"/>
+</p>
+<p align="center">iPad Pro 13 2025 (iOS v26, Safari)</p>
 
-3. For <code>[hashtags](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/modules/hashtag/hashtag.schema.js)</code> and <code>[likes](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/modules/like/like.schema.js)</code> separate collections were created with denormalization and indexing, which will provide higher performance with a large amount of data.
+2. Mongoose has been removed and replaced by [native driver](https://www.npmjs.com/package/mongodb) MongoDB.
 
-4. To search through post content, MongoDB Full-Text Search is used based on the <code>[$text](https://www.mongodb.com/docs/manual/reference/operator/query/text/)</code> operator. **Frontend ([SearchPage.jsx](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/frontend/src/pages/SearchPage/SearchPage.jsx), [Search.jsx](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/frontend/src/shared/ui/Search/Search.jsx))** | **Backend ([searchPosts](https://github.com/CrystalSystems/crystal-v2.0/blob/98498943156ac63dd3f00c2012ff45712aecfc99/backend/src/modules/post/post.controller.js#L689))**:
+3. Data schemas for all collections (<code>[users](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/modules/user/user.schema.js)</code>, <code>[posts](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/modules/post/post.schema.js)</code>, <code>[likes](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/modules/like/like.schema.js)</code>, <code>[hashtags](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/modules/hashtag/hashtag.schema.js)</code>), defined using the standard JSON Schema and [initialized](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/core/engine/db/initializeCollections.js) in MongoDB using the <code>[$jsonSchema](https://www.mongodb.com/docs/manual/reference/operator/query/jsonSchema/#mongodb-query-op.-jsonSchema)</code>. This approach provides consistency and a common structure for documents in collections.
+
+4. For <code>[hashtags](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/modules/hashtag/hashtag.schema.js)</code> and <code>[likes](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/modules/like/like.schema.js)</code> separate collections were created with denormalization and indexing, which will provide higher performance with a large amount of data.
+
+5. To search through post content, MongoDB Full-Text Search is used based on the <code>[$text](https://www.mongodb.com/docs/manual/reference/operator/query/text/)</code> operator. **Frontend ([SearchPage.jsx](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/frontend/src/pages/SearchPage/SearchPage.jsx), [Search.jsx](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/frontend/src/shared/ui/Search/Search.jsx))** | **Backend ([searchPosts](https://github.com/CrystalSystems/crystal-v2.0/blob/98498943156ac63dd3f00c2012ff45712aecfc99/backend/src/modules/post/post.controller.js#L689))**:
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/gif_1.gif"/>
 </p>
 <p align="center">Demonstration of the search engine.</p>
 <br>
-
-5. UX/UI design has been improved for larger tablet screens (iPad Pro and similar devices). The side navigation bar has become more compact, increasing the display area of ​the main content:
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/screenshot_1.webp"  alt="CRYSTAL v1.0 features"/>
-</p>
-<p align="center">|Screenshot 1| Improved UX/UI design, light theme.</p>
-<br>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/screenshot_2.webp"  alt="CRYSTAL v1.0 features"/>
-</p>
-<p align="center">|Screenshot 2| Improved UX/UI design, dark theme.</p>
-
 
 6. Added user status (online/offline). The logic is implemented using WebSocket ([frontend](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/frontend/src/shared/hooks/useWebSocket/useWebSocket.js) | [backend]([</a>](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/core/engine/web/websocket.js))). Added display of the time of the last visit to the site.
 
