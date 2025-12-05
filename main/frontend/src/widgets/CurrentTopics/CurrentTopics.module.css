@@ -5,7 +5,7 @@
   overflow: hidden;
   margin-top: 17px;
   margin-bottom: 50px;
-  position: relative; 
+  position: relative;
 }
 
 .current_topics a {
@@ -33,11 +33,6 @@
   padding: 12px;
   position: relative;
   cursor: pointer;
-}
- 
-.topic:hover {
-  transition: var(--transition_background-color_hover_global);
-  background-color: var(--item_hover_global);
 }
 
 .name {
@@ -89,16 +84,39 @@
   background-color: transparent;
 }
 
-@media (min-width: 1000px) {
+@media (max-width: 1200px) {
+  .options:active {
+    background-color: var(--options_hover);
+    transition: var(--transition_background-color_active_global);
+  }
+
+  .topic:active {
+    transition: var(--transition_background-color_hover_global);
+    background-color: var(--item_hover_global);
+  }
+
+  .show_more:active {
+    transition: var(--transition_background-color_hover_global);
+    background-color: var(--show_more_hover);
+  }
+
+}
+
+@media (min-width: 1200px) {
   .options:hover {
     background-color: var(--options_hover);
     transition: var(--transition_background-color_hover_global);
   }
-}
 
-.options:active {
-  background-color: var(--options_hover);
-  transition: var(--transition_background-color_active_global);
+  .topic:hover {
+    transition: var(--transition_background-color_hover_global);
+    background-color: var(--item_hover_global);
+  }
+
+  .show_more:hover {
+    transition: var(--transition_background-color_hover_global);
+    background-color: var(--show_more_hover);
+  }
 }
 
 .options svg {
@@ -119,11 +137,6 @@
   font-weight: 600;
   border-top: var(--border_disappears_in_dark_theme_global) !important;
   border: none;
-}
-
-.show_more:hover {
-  transition: var(--transition_background-color_hover_global);
-  background-color: var(--show_more_hover);
 }
 
 .loader_wrap {

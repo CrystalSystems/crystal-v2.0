@@ -300,8 +300,10 @@
 
 .no_avatar_icon svg {
   fill: var(--no_avatar_icon_fill);
-  width: 150px;
-  height: 150px;
+  width: 152.5px;
+  height: 152.5px;
+  top: -1.1px;
+  position: relative;
 }
 
 .avatar_save_loader {
@@ -323,8 +325,10 @@
   fill: var(--no_avatar_icon_fill);
   stroke: var(--no_avatar_icon_fill);
   stroke-width: 1.3px;
-  width: 153px;
-  height: 153px;
+  width: 155.5px;
+  height: 155.5px;
+  top: -0.5px;
+  position: relative;
 }
 
 .word_gif_icon svg {

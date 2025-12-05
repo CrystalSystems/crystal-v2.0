@@ -602,6 +602,18 @@
 
 /* /gender */
 
+@media (max-width: 1200px) {
+  .edit_user button:active {
+    background-color: var(--button_hover);
+    transition: var(--transition_background-color_hover_global);
+  }
+
+  .user_info:active {
+    background-color: var(--user_info_hover);
+    transition: var(--transition_background-color_hover_global);
+  }
+}
+
 @media (max-width: 1005px) {
   .edit_user {
     margin-bottom: 60px;
@@ -620,7 +632,7 @@
   }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1200px) {
   .edit_user button:hover {
     background-color: var(--button_hover);
     transition: var(--transition_background-color_hover_global);

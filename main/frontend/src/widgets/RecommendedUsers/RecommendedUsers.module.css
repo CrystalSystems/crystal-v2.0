@@ -48,7 +48,7 @@
   justify-content: space-between;
   overflow: hidden;
   cursor: pointer;
-  gap: 8px;
+  gap: 9px;
   width: 100%;
 }
 
@@ -68,6 +68,8 @@
 
 .avatar {
   position: relative;
+  width: 42px;
+  height: 42px;
 }
 
 .avatar img {
@@ -211,11 +213,6 @@
   z-index: 2;
 }
 
-.subscribe:hover {
-  background-color: var(--subscribe_hover);
-  transition: var(--transition_background-color_hover_global);
-}
-
 .show_more {
   padding: 8px;
   cursor: pointer;
@@ -229,11 +226,6 @@
   color: var(--color_global);
   font-weight: 600;
   width: 100%;
-}
-
-.show_more:hover {
-  transition: var(--transition_background-color_hover_global);
-  background-color: var(--show_more_hover);
 }
 
 .loader_wrap {
@@ -251,6 +243,28 @@
   bottom: 4px;
 }
 
+@media (max-width: 1200px) {
+  .user_wrap:active {
+    background-color: var(--item_hover_global);
+    transition: var(--transition_background-color_hover_global);
+  }
+
+  .options:active {
+    background-color: var(--options_hover);
+    transition: var(--transition_background-color_hover_global);
+  }
+
+  .subscribe:active {
+    background-color: var(--subscribe_hover);
+    transition: var(--transition_background-color_hover_global);
+  }
+
+  .show_more:active {
+    transition: var(--transition_background-color_hover_global);
+    background-color: var(--show_more_hover);
+  }
+}
+
 @media (max-width: 1170px) {
   .side_menu_desktop p {
     display: none;
@@ -259,7 +273,12 @@
   .avatar_name_id_wrap {
     display: grid;
     justify-content: center;
-    gap: 5px;
+    gap: 6px;
+  }
+
+  .avatar {
+    width: 43px;
+    height: 43px;
   }
 
   .avatar img {
@@ -286,7 +305,7 @@
   }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1200px) {
   .user_wrap:hover {
     background-color: var(--item_hover_global);
     transition: var(--transition_background-color_hover_global);
@@ -295,6 +314,16 @@
   .options:hover {
     background-color: var(--options_hover);
     transition: var(--transition_background-color_hover_global);
+  }
+
+  .subscribe:hover {
+    background-color: var(--subscribe_hover);
+    transition: var(--transition_background-color_hover_global);
+  }
+
+  .show_more:hover {
+    transition: var(--transition_background-color_hover_global);
+    background-color: var(--show_more_hover);
   }
 }
 

@@ -400,6 +400,38 @@ export function UserInformation() {
   }
   // /convert banner image
 
+  // Restore the image and buttons to their original state when switching to another user's page
+
+  useEffect(() => {
+
+    // 1. Resetting the states of downloaded files
+    setFileBanner(null);
+    setFileBannerUrl(undefined);
+    setFileAvatar(null);
+    setFileAvatarUrl(undefined);
+
+    // 2. Resetting progress bar states (if loading was in progress during the transition)
+    setAvatarImageLoadingStatus(false);
+    setAvatarImageLoadingStatusError(false);
+    setBannerImageLoadingStatus(false);
+    setBannerImageLoadingStatusError(false);
+
+    // 3. Resetting the values in the inputs (so that you can select the same file again)
+    if (inputAddFileBannerRef.current) {
+      inputAddFileBannerRef.current.value = '';
+    }
+    if (inputAddFileAvatarRef.current) {
+      inputAddFileAvatarRef.current.value = '';
+    }
+
+    // 4. Close the menus
+    setShowBannerButtons(false);
+    setShowAvatarButtons(false);
+
+  }, [userId]);
+
+  // /Restore the image and buttons to their original state when switching to another user's page
+
   const openMoreAboutUserModal = () => {
     dispatch(setUserId(userId));
     dispatch(setShowMoreAboutUserModal(true));
