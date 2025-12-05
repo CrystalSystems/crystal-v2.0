@@ -66,12 +66,12 @@ After passing the initial checks (Semaphore and Rate Limiting), the uploaded fil
 <p align="center">
   <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/screenshot_3.webp"  alt="CRYSTAL v1.0 features"/>
 </p>
-<p align="center">|Screenshot 3| Hidden GIF images, light theme.</p>
+<p align="center">Hidden GIF images, light theme.</p>
 <br>
 <p align="center">
   <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/screenshot_4.webp"  alt="CRYSTAL v1.0 features"/>
 </p>
-<p align="center">|Screenshot 4| Hidden GIF images, dark theme.</p>
+<p align="center">Hidden GIF images, dark theme.</p>
 
 11. Added the ability to specify user gender.
 12. On the user page, a section with detailed user information has been added: gender, registration date.
