@@ -389,6 +389,20 @@
   height: 26px;
 }
 
+@media (max-width: 1200px) {
+  .options_menu_user button:active {
+    -webkit-backdrop-filter: saturate(180%) blur(2px);
+    backdrop-filter: saturate(180%) blur(2px);
+    background-color: var(--options_menu_user_button_background-color_hover);
+    transition: var(--transition_background-color_hover_global);
+  }
+
+  .user_menu_list nav ul li:active {
+    background-color: var(--item_hover_global);
+    transition: var(--transition_background-color_hover_global);
+  }
+}
+
 @media (max-width: 1170px) {
 
   .user_menu_list {
@@ -472,7 +486,7 @@
   }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1200px) {
   .options_menu_user button:hover {
     -webkit-backdrop-filter: saturate(180%) blur(2px);
     backdrop-filter: saturate(180%) blur(2px);
