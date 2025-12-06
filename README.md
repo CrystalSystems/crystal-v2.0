@@ -27,7 +27,7 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 <p align="center">
 <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/gif_2.gif"/>
 </p>
-<p align="center"><strong>iPad Pro 13 2025 (iOS v26, Safari)</strong></p>
+<p align="center"><strong>iPad Pro 13" 2025 (iOS v26, Safari)</strong></p>
 
 2. Mongoose has been removed and replaced by [native driver](https://www.npmjs.com/package/mongodb) MongoDB.
 
