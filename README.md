@@ -27,7 +27,7 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 <p align="center">
 <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/gif_2.gif"/>
 </p>
-<p align="center">iPad Pro 13 2025 (iOS v26, Safari)</p>
+<p align="center"><strong>iPad Pro 13 2025 (iOS v26, Safari)</strong></p>
 
 2. Mongoose has been removed and replaced by [native driver](https://www.npmjs.com/package/mongodb) MongoDB.
 
@@ -40,7 +40,7 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 <p align="center">
 <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/gif_1.gif"/>
 </p>
-<p align="center">Demonstration of the search engine.</p>
+<p align="center"><strong>Demonstration of the search engine.</strong></p>
 
 6. Added user status (online/offline). The logic is implemented using WebSocket ([frontend](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/frontend/src/shared/hooks/useWebSocket/useWebSocket.js) | [backend]([</a>](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/core/engine/web/websocket.js))). Added display of the time of the last visit to the site.
 
@@ -66,12 +66,12 @@ After passing the initial checks (Semaphore and Rate Limiting), the uploaded fil
 <p align="center">
   <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/screenshot_3.webp"  alt="CRYSTAL v1.0 features"/>
 </p>
-<p align="center">Hidden GIF images, light theme.</p>
+<p align="center"><strong>Hidden GIF images, light theme.</strong></p>
 <br>
 <p align="center">
   <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/screenshot_4.webp"  alt="CRYSTAL v1.0 features"/>
 </p>
-<p align="center">Hidden GIF images, dark theme.</p>
+<p align="center"><strong>Hidden GIF images, dark theme.</strong></p>
 
 11. Added the ability to specify user gender.
 12. On the user page, a section with detailed user information has been added: gender, registration date.
