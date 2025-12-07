@@ -19,7 +19,6 @@ NPM v11.3.0.<br/>
 PM2 v5.4.3.<br/>
 Vite v6.1.0.<br/>
 
-A more convenient [description](https://shedov.top/description-and-capabilities-of-crystal-v2-0/) of this version is on the website [shedov.top](https://shedov.top/).<br/>
 Functionally, this version is almost completely identical to [CRYSTAL v1.0](https://shedov.top/description-and-capabilities-of-crystal-v1-0/), but has a number of key improvements:
 
 1. UX/UI design has been improved for larger tablet screens (iPad Pro and similar devices). The side navigation bar has become more compact, increasing the display area of ​the main content:
