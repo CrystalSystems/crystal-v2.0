@@ -19,7 +19,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 7px;
+  padding-top: 12px;
   position: sticky;
   top: 0;
   background-color: var(--logo_wrap_background-color);
@@ -64,14 +64,14 @@
 }
 
 .logo_user_not_authorized p {
-  font-size: 27px;
+  font-size: 28px;
   letter-spacing: 2.6px;
   font-weight: 700;
   font-family: OpenSans, Arial, Helvetica, sans-serif;
 }
 
 .logo_user_authorized p {
-  font-size: 27px;
+  font-size: 28px;
   letter-spacing: 2.6px;
   font-weight: 700;
   font-family: OpenSans, Arial, Helvetica, sans-serif;
@@ -83,8 +83,8 @@
   stroke: var(--stroke_global);
   stroke-width: 3;
   position: relative;
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
 }
 
 @media (max-width: 1170px) {
