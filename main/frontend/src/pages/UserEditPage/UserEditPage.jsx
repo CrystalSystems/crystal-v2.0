@@ -739,7 +739,7 @@ export function UserEditPage() {
 Before enabling the custom field, thoroughly review your country's legislation, as it may entail criminal liability, when using this field in a production environment in some countries.
 After uncommenting this code, gender customization will be enabled, related code in - user.controller.js ⬇️ */}
 
-                    <div className={styles.custom_gender_wrap}>
+                    {/*<div className={styles.custom_gender_wrap}>
                       <input
                         className={`${styles.custom_gender_input} ${authorizedUser?.profile?.gender?.type === 'custom' ? styles.active : ''
                           }`}
@@ -756,7 +756,7 @@ After uncommenting this code, gender customization will be enabled, related code
                           OK
                         </button>
                       )}
-                    </div>
+                    </div>*/}
 
                     {/* /⚠️ ATTENTION, DANGER ZONE ❗❗❗⬆️
 Before enabling the custom field, thoroughly review your country's legislation, as it may entail criminal liability, when using this field in a production environment in some countries.

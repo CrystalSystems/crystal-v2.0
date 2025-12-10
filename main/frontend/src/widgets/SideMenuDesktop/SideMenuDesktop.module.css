@@ -10,7 +10,7 @@
 
 .side_menu_desktop ul li {
   gap: 15px;
-  padding: 14px;
+  padding: 12px 13px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -43,7 +43,6 @@
   width: 24px;
   height: 24px;
   position: relative;
-  right: 1.7px;
   stroke: var(--stroke_global);
   fill: var(--fill_global);
 }
@@ -79,8 +78,7 @@
   stroke: var(--stroke_global);
   width: 24px;
   height: 24px;
-  position: relative;
-  right: 1px;
+  position: relative; 
 }
 
 .user svg {
@@ -140,7 +138,7 @@
 
   .side_menu_desktop ul {
     display: grid;
-    gap: var(--side_menu_desktop_ul_gap);
+    gap: var(--side_menu_desktop_ul_gap); 
   }
 
   .side_menu_desktop ul li {
@@ -159,14 +157,14 @@
 /* theme colors */
 [data-side-menu-desktop-dark-theme="true"] {
   --side_menu_desktop_ul_li_border-radius: 0px;
-  --side_menu_desktop_ul_li_padding: 15px;
+  --side_menu_desktop_ul_li_padding: 13px;
   --side_menu_desktop_ul_gap: 0px;
 }
 
 [data-side-menu-desktop-dark-theme="false"] {
   --side_menu_desktop_ul_li_border-radius: 22px;
   --side_menu_desktop_ul_li_padding: 10px;
-  --side_menu_desktop_ul_gap: 5px;
+  --side_menu_desktop_ul_gap: 3px;
 }
 
 /* /theme colors */
