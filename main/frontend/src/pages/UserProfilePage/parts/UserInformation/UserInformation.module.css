@@ -76,8 +76,8 @@
 
 .banner_save_loader {
   position: absolute;
-  bottom: 16.5px;
-  right: 57px;
+  bottom: 19px;
+  right: 63px;
   height: 18px;
   width: 18px;
 }
@@ -308,8 +308,6 @@
 
 .avatar_save_loader {
   position: absolute;
-  top: 15px;
-  right: 52px;
   height: 18px;
   width: 18px;
 }
@@ -605,7 +603,6 @@
   } */
   .avatar_save_loader {
     top: -14px;
-    right: 53px;
   }
 
   .banner {
