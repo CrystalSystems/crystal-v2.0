@@ -63,12 +63,12 @@ After passing the initial checks (Semaphore and Rate Limiting), the uploaded fil
 
 10. Added an interface setting that allows you to hide all GIF images on the site:
 <p align="center">
-  <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/screenshot_3.webp"  alt="CRYSTAL v1.0 features"/>
+  <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/screenshot_3_1.webp"  alt="CRYSTAL v1.0 features"/>
 </p>
 <p align="center"><strong>Hidden GIF images, light theme.</strong></p>
 <br>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/screenshot_4.webp"  alt="CRYSTAL v1.0 features"/>
+  <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/screenshot_4_1.webp"  alt="CRYSTAL v1.0 features"/>
 </p>
 <p align="center"><strong>Hidden GIF images, dark theme.</strong></p>
 
