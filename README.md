@@ -97,7 +97,6 @@ The hook automatically detects the current interface language via <code class="i
 and displays the year only if the date belongs to the previous year.
 
 20. Database cybersecurity system complies with <a href="https://shedov.top/description-and-capabilities-of-crystal-v1-0/#paragraph_7" rel="noopener" target="_blank">CRYSTAL v1.0  (Production)</a>.
-
 <br>
 <p align="center">
 <a href="https://www.youtube.com/watch?v=DsTWE1CgQ30" target="_blank">
