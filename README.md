@@ -98,6 +98,7 @@ and displays the year only if the date belongs to the previous year.
 
 20. Database cybersecurity system complies with <a href="https://shedov.top/description-and-capabilities-of-crystal-v1-0/#paragraph_7" rel="noopener" target="_blank">CRYSTAL v1.0  (Production)</a>.
 
+<br>
 <p align="center">
 <a href="https://www.youtube.com/watch?v=c56AkM3ms4o" target="_blank">
   <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/screenshot_1.webp" style="width: 100%; max-width: 100%;" alt="CRYSTAL v1.0 features"/>
