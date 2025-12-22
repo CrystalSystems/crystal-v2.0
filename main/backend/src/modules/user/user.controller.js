@@ -136,9 +136,9 @@ export const updateUser = async (req, res) => {
        After deleting or commenting out this code, gender customization will be enabled, related code in - UserEditPage.jsx ⬇️
        */
 
-      // if (type === 'custom') {
-      //   return res.status(403).json({ message: "Gender selection feature is not available" });
-      // }
+      if (type === 'custom') {
+        return res.status(403).json({ message: "Gender selection feature is not available" });
+      }
 
       /* /⚠️ ATTENTION, DANGER ZONE ❗❗❗⬆️
        Before enabling the custom field, thoroughly review your country's legislation, as it may entail criminal liability, when using this field in a production environment in some countries.
@@ -160,7 +160,7 @@ export const updateUser = async (req, res) => {
 
     // We are creating updates
     const updates = {
-      name: name || user.name,
+      name: name !== undefined ? name : user.name,
       customId: newCustomId === 'empty' ? user.customId : newCustomId,
       'profile.bio': bio !== undefined ? bio : user.profile.bio,
       avatarUri: avatarUri !== undefined ? avatarUri : oldAvatarUri,

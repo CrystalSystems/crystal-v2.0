@@ -171,8 +171,6 @@ export function UserEditPage() {
     setUserHavePost
   ] = useState(false);
 
-  console.log(userHavePosts)
-
   const userPosts = useQuery({
     queryKey: ['posts', "editUserPageUserHavePosts", userId],
     refetchOnWindowFocus: true,
@@ -192,8 +190,6 @@ export function UserEditPage() {
       : setUserHavePost(false);
   }, [userPosts]);
   // /checking whether the user has posts
-
-  console.log(userPosts?.data)
 
   const [
     userCreatorStatus,
