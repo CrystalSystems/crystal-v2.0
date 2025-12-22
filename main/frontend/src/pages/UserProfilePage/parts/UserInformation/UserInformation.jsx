@@ -740,7 +740,12 @@ export function UserInformation() {
             </div>
           )}
           {/* additional information */}
-          <div className={styles.additional_information_wrap}>
+          <div className={
+            userName ?
+              styles.additional_information_wrap
+              :
+              `${styles.additional_information_wrap} ${styles.additional_information_wrap_no_name}`
+          }>
             <div className={styles.additional_information_wrap_button}>
               <button onClick={openMoreAboutUserModal}>
                 {t("UserInformation.ShowMore")}
