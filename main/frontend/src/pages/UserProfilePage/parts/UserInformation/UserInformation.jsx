@@ -405,9 +405,9 @@ export function UserInformation() {
   useEffect(() => {
 
     // 1. Resetting the states of downloaded files
-    setFileBanner(null);
+    setFileBanner(undefined);
     setFileBannerUrl(undefined);
-    setFileAvatar(null);
+    setFileAvatar(undefined);
     setFileAvatarUrl(undefined);
 
     // 2. Resetting progress bar states (if loading was in progress during the transition)
