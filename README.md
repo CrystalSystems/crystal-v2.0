@@ -42,7 +42,7 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 <p align="center">
 <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/gif_1.gif"/>
 </p>
-<p align="center"><strong>Demonstration of the search engine.</strong></p>
+<p align="center"><strong>Demonstration of the search engine</strong></p>
 
 6. Added user status (online/offline). The logic is implemented using WebSocket ([frontend](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/frontend/src/shared/hooks/useWebSocket/useWebSocket.js) | [backend]([</a>](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/core/engine/web/websocket.js))). Added display of the time of the last visit to the site.
 
@@ -68,12 +68,12 @@ After passing the initial checks (Semaphore and Rate Limiting), the uploaded fil
 <p align="center">
   <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/screenshot_3_1.webp"  alt="CRYSTAL v1.0 features"/>
 </p>
-<p align="center"><strong>Hidden GIF images, light theme.</strong></p>
+<p align="center"><strong>Hidden GIF images, light theme</strong></p>
 <br>
 <p align="center">
   <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/refs/heads/main/assets/screenshot_4_1.webp"  alt="CRYSTAL v1.0 features"/>
 </p>
-<p align="center"><strong>Hidden GIF images, dark theme.</strong></p>
+<p align="center"><strong>Hidden GIF images, dark theme</strong></p>
 
 11. Added the ability to specify user gender.
 12. On the user page, a section with detailed user information has been added: gender, registration date.
