@@ -5,7 +5,7 @@
 [![About_project](https://img.shields.io/badge/About_project-black?style=for-the-badge)](https://shedov.top/about-the-crystal-project)&nbsp;[![Documentation](https://img.shields.io/badge/Documentation-black?style=for-the-badge)](https://shedov.top/documentation-crystal/)&nbsp;[![Developer’s Diary](https://img.shields.io/badge/Developer’s_Diary-black?style=for-the-badge)](https://shedov.top/category/crystal/crystal-developers-diary/)
 
 **Architecture:** <br/>
-SPA, REST API, FSD.
+SPA, REST API, FSD
 
 **Composition:** <br/>
 [Full code](https://github.com/CrystalSystems/crystal-v2.0/tree/main/main) | Package.json: [frontend](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/frontend/package.json) &#x2234; [backend](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/package.json)<br/>
