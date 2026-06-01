@@ -44,7 +44,7 @@ Functionally, this version is almost completely identical to [CRYSTAL v1.0](http
 </p>
 <p align="center"><strong>Demonstration of the search engine</strong></p>
 
-6. Added real-time online/offline user status. The functionality is implemented using WebSocket ([frontend](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/frontend/src/shared/hooks/useWebSocket/useWebSocket.js) | [backend]([</a>](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/core/engine/web/websocket.js))). Added display of the time of the last visit to the site.
+6. Added real-time online/offline user status powered by WebSocket ([frontend](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/frontend/src/shared/hooks/useWebSocket/useWebSocket.js) | [backend]([</a>](https://github.com/CrystalSystems/crystal-v2.0/blob/main/main/backend/src/core/engine/web/websocket.js))). Added display of the time of the last visit to the site.
 
 7. The user status (when offline) now displays the time of their last visit to the site.
 
