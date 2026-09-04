@@ -109,12 +109,16 @@ and displays the year only if the date belongs to the previous year.
 
 **⚠️ Before using [CRYSTAL v2.0](https://github.com/CrystalSystems/crystal-v2.0) or its code in a production environment, it is strongly recommended to carefully review the implementation and assess any potential cybersecurity risks.**<br/>
 
+
+<br>
 <h3 align="center">CRYSTAL is tested on</h3>
 <p align="center">
   <a href="https://www.browserstack.com/">
-    <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v2.0/bc7bf8b166feef1f4aed3e88dac61d1a25dd2665/assets/browserstack_logo.svg" width="290" />
+    <img src="https://raw.githubusercontent.com/CrystalSystems/crystal-v1.0/b753d0d08a3630720d92dc139ee6255f0375cad3/assets/browserstack_logo.svg" width="290" />
   </a>
 </p>
+<br>
+<br>
 
 [![SHEDOV.TOP](https://img.shields.io/badge/SHEDOV.TOP-black?style=for-the-badge)](https://shedov.top/) 
 [![CRYSTAL](https://img.shields.io/badge/CRYSTAL-black?style=for-the-badge)](https://crystal.you/AndrewShedov)
